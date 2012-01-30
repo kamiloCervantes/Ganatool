@@ -1,0 +1,5 @@
+3 requerimientos presentan problemas:
+
+Modificar perfil
+Generador de dietas
+Modificar ganado
