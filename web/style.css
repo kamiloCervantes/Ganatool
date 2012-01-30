@@ -1,0 +1,1065 @@
+body {
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+ background: #FFF url(images/1252.png) repeat left top;
+}
+
+#header {
+ width: 1024px;
+ height: 180px;
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+ background: url(images/img03.gif) repeat-x left top;
+}
+
+/* header administrador */
+#header-admin{
+ width: 1024px;
+ height: 60px;
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+ background-color: #80C104;
+}
+
+/* Menu */
+#menu {
+ float: left;
+ width: 1024px;
+ height: 44px;
+}
+
+#menu ul {
+ margin: 0;
+ padding: 0px 0px 0px 0px;
+ list-style: none;
+ line-height: normal;
+}
+
+#menu li {
+ display: block;
+ float: left;
+}
+
+#menu a {
+ display: block;
+ float: left;
+ height: 34px;
+ margin-right: 1px;
+ padding: 10px 30px 0px 30px;
+ letter-spacing: -1px;
+ text-decoration: none;
+ text-align: center;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 13px;
+ font-weight: normal;
+ color: #FFFFFF;
+}
+
+#menu a:hover { 
+ background:#003;
+ text-decoration: none;
+}
+
+#menu .current_page_item a {
+ background:#003;
+}
+
+/** LOGO */
+#logo {
+ width: 1024px;
+ height: 100px;
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+ padding: 0px 0px 20px 20px;
+ color: #FFF;
+}
+
+#logo h1, #logo h2 {
+ margin: 0px;
+ line-height: normal;
+ font-family: Georgia, "Times New Roman", Times, serif;
+ color: #FFF;
+}
+
+#logo h2 {
+ color: #FFF;
+ font-style: italic;
+ font-weight: normal;
+ word-spacing: 2px;
+ letter-spacing: 0,7px;
+}
+
+#logo h1 a {
+ color: #FFF;
+}
+
+#logo h1 {
+ padding-top: 80px;
+ font-size: 52px;
+ font-weight: normal;
+ font-style: italic;
+ color: #FFFFFF;
+}
+
+#logo a {
+ text-decoration: none;
+ color: #0F0;
+}
+
+/* Page */
+#page {
+ width: 1024px;
+ padding: 0px;
+ background: #FFFFFF;
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+}
+
+/* Content */
+#content {
+ float: right;
+ width: 680px;
+ margin: 0px 0px 0px 0px;
+ padding: 40px 30px 0px 20px;
+}
+
+/* Post */
+.post {
+ margin-bottom: 45px;
+ padding-bottom: 30px;
+ border-bottom: 1px solid #E0E0E0;
+}
+
+.post h2.title a {
+ text-decoration: none;
+ font-size: 30px;
+ color: #009;
+}
+
+.post h2.title{
+ font-family: Georgia, Helvetica, Sans;
+ font-style: italic;
+}
+
+.post div.entry {
+ padding: 10px 0px 20px 0px;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+/* menu panel user */
+.post table.menu {
+ margin-top: 30px;
+ width: 675px;
+}
+
+.post table.menu td{
+ margin-top: 30px;
+ padding-left: 0px;
+ padding-bottom: 30px;
+}
+
+.post table.menu td img{
+ width: 190px;
+ height: 122px;
+}
+
+/* Sidebar */
+#sidebar {
+ width: 200px;
+ font-family: Verdana, Helvetica, sans-serif;
+ font-size: 12px;
+ padding-top: 40px;
+ padding-right: 0px;
+ padding-bottom: 0px;
+ padding-left: 30px;
+}
+
+#sidebar ul {
+ margin: 0;
+ padding: 0;
+ list-style: none;
+ line-height: normal;
+}
+
+#sidebar li {
+ display: block;
+ text-align: center;
+
+}
+
+#sidebar li ul {
+ margin: 0px 0px;
+}
+
+#sidebar li li {
+ margin: 0px 0px 0px 10px;
+ padding: 10px 0px 10px 0px;
+ border-bottom: #E0E0E0 solid 1px;
+ display: block;
+}
+
+#sidebar li li a {
+ font-weight: normal;
+ display: block;
+ height: 34px;
+ margin-right: 1px;
+ padding: 10px 10px 0px 30px;
+ letter-spacing: -1px;
+ text-decoration: none;
+ font-family: Verdana, Helvetica, sans-serif;
+ font-size: 12px;
+ font-weight: normal;
+}
+
+#sidebar li li a:hover {
+ font-weight: normal;
+ background: #F30;
+ color: #FFF;
+}
+
+#sidebar p {
+ margin: 0;
+ padding: 0px 14px;
+}
+
+#sidebar li h2 {
+ height: 30px;
+ margin: 0 0 10px 0px;
+ padding: 6px 0 2px 0px;
+ font-size: 18px;
+ font-weight: normal;
+ color: #B44000;
+}
+
+#sidebar p {
+ line-height: 200%;
+}
+
+#sidebar a {
+ text-align: left;
+ text-decoration: none;
+}
+
+/* login */
+li#login{
+ background-color: #1a1eb2;
+ padding-bottom: 0px;
+ margin-bottom:30px;
+}
+
+li#login ul{
+ padding-bottom: 10px;
+}
+
+li#login li{
+ border-bottom:0;
+ margin-bottom: 1px;
+ padding-bottom: 0;
+ margin-left: 3px;
+}
+
+li#login li#titulo{
+ font-size: 24px;
+ color: white;
+ font-family: Georgia, sans, serif;
+ font-style: italic;
+ margin-left: 8px;
+ padding-left: 20px;
+ padding-top: 5px;
+ background: url("images/login.png") center left no-repeat;
+}
+
+li#login li.links{
+ margin-bottom: 0px;
+ margin-top: 0px;
+}
+
+li#login li.links a{
+ padding: 2px 2px 2px 2px;
+ display:block;
+ margin: 0px 0px 0px 0px;
+ color: white;
+}
+
+li#login li.links a:hover{
+ background: #003;
+}
+
+/* Footer */
+#footer, #footer-adm{
+ width: 1024px;
+ height: 60px;
+ padding: 0;
+}
+
+#footer-bgcontent, #footer-bgcontent-adm {
+ height: 110px;
+ width: 1024px;
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+}
+
+#footer-bgcontent{
+ background-color:#003;
+}
+
+#footer p, #footer-adm p{
+ margin: 0;
+ padding: 28px 0px 0px 0px;
+ text-align: center;
+ line-height: normal;
+ font-family: Arial, Georgia, serif, sans;
+ font-size: 12px;
+}
+
+#footer p{
+ color: #ddd;
+}
+
+/* footer admin */
+#footer-bgcontent-adm{
+ background-color:#005e00;
+}
+
+#footer-adm p{
+ color: #fff;
+}
+
+/* header usuario logueado */
+#header-user{
+ width: 1024px;
+ height: 60px;
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+ background: url(images/img03.gif) repeat-x left top;
+}
+
+/** LOGO usuario logueado*/
+#logo-user {
+ width: 1024px;
+ height: 50px;
+ margin-top: 0px;
+ margin-right: auto;
+ margin-bottom: 0px;
+ margin-left: auto;
+ padding: 0px 0px 20px 20px;
+ color: #FFF;
+}
+
+#logo-user h1, #logo-user h2 {
+ margin: 0px;
+ line-height: normal;
+ font-family: Georgia, "Times New Roman", Times, serif;
+ color: #FFF;
+}
+
+#logo-user td.mid{
+ padding-top: 16px;
+ padding-left: 8px;
+}
+
+#logo-user h2 {
+ color: #FFF;
+ font-style: italic;
+ font-weight: normal;
+ word-spacing: 2px;
+ letter-spacing: 0,7px;
+ font-size: 14px;
+}
+
+#logo-user h1 a {
+ color: #FFF;
+}
+
+#logo-user h1 {
+ padding-top: 10px;
+ font-size: 28px;
+ font-weight: normal;
+ font-style: italic;
+ color: #FFFFFF;
+}
+
+#logo-user a {
+ text-decoration: none;
+ color: #0F0;
+}
+
+/* Conexion (Conectado como: xxxxxxxxx*/
+td#conexion, td#logout{
+ width: 80px;
+ margin-top: 20px;
+ float: right;
+}
+
+td#conexion{
+ background: url("images/username.gif") center left no-repeat;
+ margin-left: 170px;
+ padding-left: 23px;
+}
+
+td#conexion a, td#logout a{
+ color: white;
+ font-family: Arial, Georgia, serif, sans;
+}
+
+td#logout{
+ background: url("images/logout.png") center left no-repeat;
+ margin-left: 50px;
+ padding-left: 28px;
+}
+
+div#header-user table a:hover{
+ color: yellow;
+}
+
+/* Menu usuario */
+div.contenedorlista ul, div.contenedorlistaadm ul {
+ display : table-row;
+}
+
+div.contenedorlista li, div.contenedorlistaadm li  {
+ display : block;
+ height : 20px;
+ list-style-image : none;
+ list-style-type : none;
+ margin-bottom : 0px;
+ padding-bottom: 0px;
+ margin-left : 5px;
+ text-align : center;
+ padding-top: 8px;
+ width : 190px;
+ font-family: Arial, Georgia, serif, sans;
+ font-size: 14px;
+}
+
+div.contenedorlista li {
+ background-color : #115599;
+}
+
+div.contenedorlista li:hover {
+ background-color : #003;
+}
+
+div.contenedorlista li.current {
+ background-color : #003;
+}
+
+div.contenedorlista, div.contenedorlistaadm {
+ background-color: #115599;
+ width: 200px;
+ margin-left: 0px;
+ margin-bottom: 20px;
+}
+
+div.contenedorlista a, div.contenedorlistaadm a{
+ color: white;
+}
+
+div#contenedorsubitem1, div#contenedorsubitem2, div#contenedorsubitem3, div#contenedorsubitem4, div#contenedorsubitem5 , div#contenedorsubitem6{
+ background-color: white;
+ margin-left : 5px;
+ margin-top: -2px;
+ width : 150px;
+ display: none;
+}
+
+div#contenedorsubitem1 li,div#contenedorsubitem2 li ,div#contenedorsubitem3 li, div#contenedorsubitem4 li, div#contenedorsubitem5 li, div#contenedorsubitem6 li{
+ margin-left : 0px;
+ height: 20px;
+ background-color:white;
+ font-size: 11px;
+ display: block;
+ width: 186px;
+ border-left: 4px solid #ccc;
+}
+
+div#contenedorsubitem1 li a,div#contenedorsubitem2 li a,div#contenedorsubitem3 li a, div#contenedorsubitem4 li a, div#contenedorsubitem5 li a, div#contenedorsubitem6 li a{
+ color: black;
+}
+
+div#contenedorsubitem1 li:hover, div#contenedorsubitem2 li:hover, div#contenedorsubitem3 li:hover, div#contenedorsubitem4 li:hover, div#contenedorsubitem5 li:hover, div#contenedorsubitem6 li:hover{
+ font-weight: bold;
+ border-left: 4px solid #003;
+}
+
+/* menu administrador (igual que el de user pero de colores verde monocromo) */
+div.contenedorlistaadm{
+ background-color : #005e00;
+}
+
+div.contenedorlistaadm li.current{
+ background-color : #80C104;
+}
+
+div.contenedorlistaadm li:hover {
+ background-color : #80C104;
+}
+
+div.contenedorlistaadm li{
+ background-color : #005e00;
+}
+
+/* perfil del usuario acciones*/
+div#perfil-actions, div#global-actions, div#ingredientes-actions, div#banco-actions{
+ height: 35px;
+ width:100%;
+ background-color: #112cab;
+ display:block;
+}
+
+div#perfil-actions a, div#global-actions a, div#ingredientes-actions a, div#banco-actions a{
+ color: white;
+ font-family: Arial, Georgia, Sans-serif;
+ text-decoration: none;
+}
+
+div#perfil-actions tr#acciones, div#global-actions tr#acciones, div#banco-actions tr#acciones{
+ margin-left: 300px;
+ display: block;
+}
+
+div#banco-actions tr#acciones{
+ margin-left: 450px;
+}
+
+div#perfil-actions tr#acciones td, div#global-actions tr#acciones td, div#ingredientes-actions tr#acciones td, div#banco-actions tr#acciones td{
+ padding-left:10px;
+}
+
+div#ingredientes-actions tr#acciones{
+ margin-left: 165px;
+ display: block;
+}
+
+/* detalles para el menu de acciones */
+div#perfil-actions td.current:hover, div#global-actions td.current:hover, div#ingredientes-actions td.current:hover, div#banco-actions td.current:hover{
+ border-top: 2px solid yellow;
+}
+
+div#perfil-actions td.current a, div#global-actions td.current a, div#ingredientes-actions td.current a, div#banco-actions td.current:hover a{
+ color: yellow;
+}
+
+div#perfil-actions td:hover, div#global-actions td:hover, div#ingredientes-actions td:hover, div#banco-actions td:hover{
+ border-top: 2px solid white;
+}
+
+/* perfil del usuario */
+div#perfil-foto{
+ height: 160px;
+ width: 120px;
+ margin-top: 50px;
+ background-color: #000;
+ float:left;
+ display: block;
+ padding-top:5px;
+ padding-bottom:5px;
+ padding-left:5px;
+ padding-right:5px;
+ margin-left: 50px;
+}
+
+div#perfil-foto img{
+ height:160px;
+ width: 120px;
+}
+
+div#perfil-datos, div#perfil-cuenta{
+ width:450px;
+ height: 250px;
+ margin-top: 20px;
+ display:block;
+ float: right;
+ padding-top:5px;
+ padding-bottom:5px;
+}
+
+div#perfil-datos ul, div#perfil-cuenta ul{
+ display: table-row;
+}
+
+div#perfil-datos li, div#perfil-cuenta li{
+ list-style:none;
+ display: block;
+ padding: 0px 0px 0px 0px;
+ margin-left: 10px;
+}
+
+div#perfil-datos li p{
+ font-family:Arial, Georgia, sans-serif;
+ font-size: 12px;
+ font-weight: bold;
+ color: #112cab;
+}
+
+div#perfil-datos li p#user{
+ font-size: 24px;
+ color: blue;
+ font-family: Georgia, Arial, sans-serif;
+ font-style: italic;
+}
+
+div#perfil-datos li p span.data{
+ font-size: 16px;
+ color: #000;
+}
+
+/* modificar perfil , input file invisible sobre una imagen*/
+div#fileinputs {
+ position: relative;
+}
+
+div#fileinputs input.file {
+ position: relative;
+ text-align: right;
+ -moz-opacity:0 ;
+ filter:alpha(opacity:0);
+ opacity: 0;
+ z-index: 3;
+ background-color: #ccc;
+ width: 120px;
+ height: 160px;
+}
+
+div#fileinputs img{
+ position:relative;
+ z-index: 2;
+ top: -160px;
+}
+
+div#perfil-foto p#editimg{
+ position: relative;
+ color: blue;
+ font-size: 10px;
+ font-family: Arial, Georgia, sans-serif;
+ top: -160px;
+}
+
+/* modificar cuenta */
+div#perfil-cuenta li p{
+ font-size: 14px;
+ font-family: Arial, Georgia, sans-serif;
+ color:#000;
+}
+
+div#perfil-cuenta li p.subtitulo{
+ font-size: 18px;
+ font-family: Georgia, Arial, sans-serif;
+ color: blue;
+}
+
+/* pagina error 404 */
+.post ul#err404{
+ display: table-row;
+}
+
+.post ul#err404 li{
+ list-style: none;
+ margin-right: 160px;
+ font-family: Arial, Georgia, sans-serif;
+ margin-bottom: 5px;
+ position: relative;
+ z-index: 1;
+}
+
+.post ul#err404 li#titulo{
+ font-family: Georgia, Arial, sans-serif;
+ font-size: 24px;
+ font-weight: bold;
+ font-style: italic;
+ padding-bottom: 4px;
+}
+
+.post ul#err404 li.subtitulo{
+ font-family: Times new Roman, Arial, sans-serif;
+ font-style: italic;
+}
+
+.post div#img404{
+ float: right;
+ background: url('images/404.png');
+ display: block;
+ width: 320px;
+ height: 300px;
+ margin-right: 0px;
+ margin-top: -300px;
+ position: relative;
+ z-index: 0;
+}
+
+/* banners */
+div#fincas-banner, div#reses-banner, div#ingredientes-banner, div#dietas-banner,  div#bancodietas-banner{
+ width: 100%;
+ height: 150px;
+ border-bottom: 4px solid #112cab;
+}
+
+div#fincas-banner{
+ background: url('images/fincasbanner.jpg');
+}
+
+div#reses-banner{
+ background: url('images/resesbanner.jpg');
+}
+
+div#ingredientes-banner{
+ background: url('images/ingredientesbanner.jpg');
+}
+
+div#dietas-banner{
+ background: url('images/dietasbanner.jpg');
+}
+
+div#bancodietas-banner{
+ background: url('images/bancodietasbanner.jpg');
+}
+
+/* pagina fincas */
+table.finca{
+ margin-top: 20px;
+ width: 100%;
+ border-bottom: 1px solid #04cfff;
+}
+
+table.finca:hover{
+ background-color: #04cfff;
+}
+
+table.finca td.img-finca{
+ padding-left: 20px;
+}
+
+table.finca td.data-finca ul, table.finca td.actions-finca ul, table.finca td#quitaringrediente ul{
+ list-style: none;
+ font-family: Arial, Georgia, sans-serif;
+ font-size: 14px;
+}
+
+table.finca td.data-finca li, table.finca td.actions-finca li, table.finca td#quitaringrediente li{
+ margin-bottom: 4px;
+}
+
+table.finca td.data-finca li.titulo{
+ font-family: Georgia, Arial, sans-serif;
+ font-size: 24px;
+ font-weight: bold;
+ font-style: italic;
+}
+
+table.finca td.data-finca li.subtitulo{
+ font-family: Times New Roman, Georgia, Arial, sans-serif;
+ font-size: 18px;
+ font-style: italic;
+}
+
+table.finca td.actions-finca a, table.finca td#quitaringrediente a{
+ text-decoration: none;
+}
+
+table.finca td.actions-finca a:hover, table.finca td#quitaringrediente a:hover{
+ text-decoration: underline;
+}
+
+/* formularios de registro*/
+
+div#registro{
+ font-family: Arial, Georgia, sans-serif;
+}
+
+div#registro div#tituloregistro, .subsecciones{
+ background-color: #447bd4;
+ height: 35px;
+ width:100%;
+ text-align: center;
+ padding-top: 5px;
+ margin-bottom: 15px;
+ color: white;
+ font-family: Georgia, Arial, sans-serif;
+ font-style: italic;
+ font-size: 19px;
+}
+
+div#registro table#btns{
+ margin-top:12px;
+}
+
+div#registro table#btns td{
+ padding-left: 50px;
+}
+
+/* buscador */
+div#buscador-main{
+ width: 100%;
+ height: 80px;
+}
+
+div#buscador-main input{
+ font-size: 24px;
+ border-top: 1px solid #cc0;
+ border-left: 1px solid #ccc;
+ border-bottom: 1px solid #ccc;
+ border-right: 1px solid #cc0;
+ padding: 1px 1px 1px 1px;
+}
+
+div#buscador-main input#buscarbtn{
+ font-size: 16px;
+ padding: 2px 5px 2px 5px;
+}
+
+div#buscador-main input#buscarbtn:hover{
+ background-color: blue;
+ color: white;
+}
+
+div#buscador-main td.opcbusqueda{
+ font-family: Arial, Georgia, sans-serif;
+ font-size: 12px;
+}
+
+div#resultados{
+ margin-top: 25px;
+}
+
+div#resultados div#resultados-info table{
+ width: 100%;
+ background-color: #a0e2e2;
+ padding: 2px 2px 2px 2px;
+ font-family: Georgia, Arial,sans-serif;
+ font-style: italic;
+}
+
+/* pagina de fincas*/
+
+div.subsubseccion{
+ display: block;
+ border-top: 1px solid #77e4f9;
+ background-color: #d2f3f9;
+ margin-top:20px;
+}
+
+div.subsubseccion p{
+ text-align: right;
+ font-family: Georgia, Arial, sans-serif;
+ font-style: italic;
+ margin-top: 0px;
+ color: #003f4b;
+}
+
+div#finca-info table.finca{
+ border-bottom: 0px;
+}
+
+div#finca-info table.finca:hover{
+ background-color: white;
+}
+
+div#lista-ganado table{
+ width: 100%;
+}
+
+div#lista-ganado td, div#lista-ganado th{
+ font-family: Arial, Georgia, sans-serif;
+ border-bottom: 1px solid #003f4b;
+ text-align: center;
+ font-size: 13px;
+}
+
+div#lista-ganado th{
+ border-top: 1px solid #003f4b;
+ font-size: 15px;
+
+}
+
+div#lista-ganado td a{
+ text-decoration: none;
+}
+
+div#lista-ganado td a:hover{
+ text-decoration: underline;
+}
+
+div#finca-info table#finca-actions{
+ margin-left: 450px;
+}
+
+table#res-actions{
+ margin-left: 550px;
+ margin-top:15px;
+}
+
+table#ingredientes-actions{
+ margin-left: 390px;
+}
+
+div#finca-info table#finca-actions a, table#res-actions a, table#ingredientes-actions a{
+ text-decoration: none;
+ display: block;
+ font-size: 10px;
+ font-family: Verdana, Arial, Georgia, sans-serif;
+ font-weight: bold;
+ padding-left: 22px;
+ padding-top:5px;
+ padding-bottom:5px;
+}
+
+div#finca-info table#finca-actions td#modifica, table#ingredientes-actions td#modifica{
+ background: url('images/edits.jpg') no-repeat;
+}
+
+div#finca-info table#finca-actions td#elimina, table#ingredientes-actions td#elimina{
+ background: url('images/borrars.jpg') no-repeat;
+}
+
+table#res-actions td#agregaregistro{
+ background: url('images/lista.png') no-repeat;
+}
+
+div#finca-info table#finca-actions a:hover, table#res-actions a:hover, table#ingredientes-actions a:hover{
+ text-decoration: underline;
+}
+
+table#agregaregistro{
+ display: none;
+}
+
+/* lista de ingredientes */
+div#listaingredientes table{
+ width: 100%;
+}
+
+div#listaingredientes{
+ margin-top: 30px;
+}
+
+div#listaingredientes th{
+ font-family: Georgia, Arial, sans-serif;
+ font-style: italic;
+ font-weight: bold;
+ font-size: 16px;
+ padding-bottom: 10px;
+ background-color: #447bd4;
+ padding-top:5px;
+ color: #fff;
+}
+
+div#listaingredientes td{
+ font-size: 13px;
+ font-family: Arial, Georgia, sans-serif;
+ text-align: center;
+ border-bottom: 1px solid gray;
+ padding-bottom: 3px;
+ padding-top: 5px;
+}	
+
+div#listaingredientes a{
+ text-decoration: none;
+}
+
+div#listaingredientes a:hover{
+ text-decoration: underline;
+}
+
+div.comments{
+ width: 100%;
+ background-color: #185a95;
+}
+
+div.comments div.fecha{
+ width:100%
+  float:right;
+ text-align: right;
+}
+
+div.comments div.fecha p{
+ color: #fff;
+ font-family: Times New Roman, Times, Arial;
+ font-style: italic;
+ display: inline;
+ padding-right: 8px;
+}
+
+div.comments div.fecha li{
+ display: inline;
+ list-style-type: none;
+}
+
+div.comments div.fecha li img{
+ padding-top: 3px;
+}
+
+div.comments div.user{
+ margin-top: -40px;
+}
+
+div.comments div.user table{
+ margin-left: 20px;
+ padding-top: 4px;
+}
+
+div.comments div.user a{
+ font-family: Georgia, Arial, sans-serif;
+ font-size: 18px;
+ font-style: italic;
+ color: #fff;
+ text-decoration: none;
+}
+
+div.comments div.user a:hover{
+ text-decoration: underline;
+ color: yellow;
+}
+
+div.comments div.contenidocomment{
+ width: 100%-20px;;
+ background-color: #a6c7e4;
+ padding: 10px 10px 10px 10px;
+}
+
+div.comments div.contenidocomment p{
+ text-align: justify;
+ font-family: Arial, Georgia, sans-serif;
+ font-size: 13px;
+}
+
+div#addcomentario{
+ margin-top: 40px;
+}
+
+div#addcomentario li{
+ list-style: none;
+}
+
+div#addcomentario ul#commentform{
+ border-top: 1px solid #ccc;
+}
+
+div#addcomentario p, td#valoracion p{
+ font-family: Georgia, Arial, sans-serif;
+ font-size: 20px;
+ font-style: italic;
+}
+
+div#addcomentario textarea#styled {
+ width: 600px;
+ height: 120px;
+ border: 3px solid #cccccc;
+ padding: 5px;
+ font-family: Arial, sans-serif;
+ background-position: bottom right;
+ background-repeat: no-repeat;
+}

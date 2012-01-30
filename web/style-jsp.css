@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+/* alertas */
+.post .msgok{
+ color:#009900;
+ font-weight:bold;
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:12px;
+}
+
+.post .msgerror{
+ color:#FF0000;
+ font-weight:bold;
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:12px;
+ text-align: left;
+}
+
+/* formulario de registro */
+div#registro{
+ background-color: #fff;
+}
+
+
+input#enviar, input#limpiar {
+ background-color: #2F33CC;
+ color: #FFF;
+ height: 30px;
+ width: 170px;
+ font-weight: bold;
+}
+
+/* estilos del formulario */
+.Estilo1 {
+ color: red;
+ font-weight: bold;
+}
+
+.head1_table {
+ background-color: #1a1eb2;
+ color: #FFFFFF;
+ font-size: 16px;
+}
+
+.head1_table p.titulo{
+ font-family: Georgia, Arial, sans-serif;
+ font-style: italic;
+}
+
+.estilo1_table {
+ color: #000;
+ border: solid;
+ border-color: #1a1eb2;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 12px;
+}
+
+.titulo_graph {
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 12px;
+ color: #0033FF;
+ text-align: left;
+ font-weight: bold;
+}
+
+.select_generador {
+ width:350px;
+ background-color:#04cfff;
+ font-family: Arial, Georgia, sans-serif;
+ font-weight:bold;
+ color: #000;
+}
+
+.seccion-error {
+ background-color:#FFFF99;
+ font-family: Arial, Georgia, sans-serif;
+ font-size: 12px;
+}
