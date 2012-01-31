@@ -39,6 +39,7 @@ public class BDControlador {
     private AdministrarGanado AG;
     private AdministrarIngredientes AI;
     private AdministrarDieta AD;
+    private AdministrarSistema ADM;
 
     public BDControlador() {
         try {
@@ -52,6 +53,7 @@ public class BDControlador {
             AG = new AdministrarGanado();
             AI = new AdministrarIngredientes();
             AD = new AdministrarDieta();
+            ADM = new AdministrarSistema();
 
             ConectarBD();
         } catch (ClassNotFoundException ex) {
@@ -1142,5 +1144,11 @@ public class BDControlador {
         }
 
         return AD.cargarDietas(PS.executeQuery());
+    }
+    
+    public ArrayList<Usuario> cargarUsuarios() throws SQLException{
+        SQL = "SELECT * FROM usuario";
+        PS = conexion.prepareStatement(SQL);
+        return ADM.cargarUsuarios(PS.executeQuery());
     }
 }
