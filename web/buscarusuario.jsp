@@ -59,18 +59,12 @@ function switchSubitem(item){
 </script>
  <%
               Usuario U = null;
-              ArrayList<Usuario> users = null;
+               ArrayList<Usuario> userbuscado = null;
               if (request.getSession().getAttribute("usuario") != null) {
                   U = (Usuario) request.getSession().getAttribute("usuario");
                   if(U.getRol()!= 'a'){
                       response.sendRedirect("panelvet.jsp");
                   }
-                  else{
-                      if (request.getSession().getAttribute("users") != null) 
-                      users = (ArrayList<Usuario>) request.getSession().getAttribute("users");
-                   else 
-                      response.sendRedirect("paneladm.jsp");
-              } 
                 }
                   else {
                     response.sendRedirect("index.jsp");
@@ -93,7 +87,7 @@ function switchSubitem(item){
 		<div id="content">
 			<div class="post">
 				<div class="titulo">
-				<h2>Gesti&oacute;n de usuarios</h2>
+				<h2>Resultados de la B&uacute;squeda</h2>
 				<hr>
 				</div>
                             <div id="controles" class="controls">
@@ -102,7 +96,7 @@ function switchSubitem(item){
                                 <input type="submit" value="Buscar"/>
                                 </form>
                             </div>
-				<table id="usuarios" class="gestion">
+                            <table id="usuarios" class="gestion">
 					<tr class="first-child">
 						<td>Usuario</td>
 						<td>Nombre</td>
@@ -111,7 +105,13 @@ function switchSubitem(item){
 						<td>Rol</td>
 						<td>Acciones</td>
 					</tr>
-                                        <% for(Usuario u: users){ %>
+                                                                    <% 
+                                        if (request.getSession().getAttribute("userbuscado") != null){
+                                            userbuscado = (ArrayList<Usuario>) request.getSession().getAttribute("userbuscado");
+                                            for(Usuario u: userbuscado){
+                                         %>
+				
+
 					<tr>
 						<td><%=u.getUsuario()%></td>
 						<td><%=u.getNombre() %></td>
@@ -125,8 +125,16 @@ function switchSubitem(item){
 							</select>
 						</td>
 					</tr>
+                                                
                                         <% } %>
-				</table>
+                                        </table>
+                                        <%}
+                                           else {         
+                                        %>
+                                        <h2>No hay resultados.</h2>
+                                        <%
+                                           }
+                                        %>
 			<!-- contenido de la pgina -->
 
 		         </div><!-- end #post -->

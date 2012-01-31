@@ -1151,4 +1151,28 @@ public class BDControlador {
         PS = conexion.prepareStatement(SQL);
         return ADM.cargarUsuarios(PS.executeQuery());
     }
+    
+    /* tipobusqueda:
+     * 1 -> por nombre de usuario
+     * 2 -> por nombre
+     * 3 -> por apellido
+     */
+    public ArrayList<Usuario> buscarUsuario(String param, int tipobusqueda, ArrayList<Usuario> usuarios) throws SQLException{
+        if(tipobusqueda==1){
+            SQL = "SELECT * FROM usuario where usuario=?";
+            PS = conexion.prepareStatement(SQL);
+            PS.setString(1, param);
+        }
+        if(tipobusqueda==2){
+            SQL = "SELECT * FROM usuario where nombre=?";
+            PS = conexion.prepareStatement(SQL);
+            PS.setString(1, param);
+        }
+        if(tipobusqueda==3){
+            SQL = "SELECT * FROM usuario where apellidos=?";
+            PS = conexion.prepareStatement(SQL);
+            PS.setString(1, param);
+        }
+        return ADM.buscarUsuario(PS.executeQuery(),usuarios);
+    }
 }

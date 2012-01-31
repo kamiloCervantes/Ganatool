@@ -175,6 +175,9 @@ public class Servlet extends HttpServlet {
             if (out.equals("listarusuarios.do")) {
                 this.listarUsuarios(request, response);
             }
+            if (out.equals("buscarusuario.do")) {
+                this.buscarUsuario(request, response);
+            }
         } catch (SQLException ex) {
             System.err.println(ex);
         }
@@ -824,4 +827,34 @@ public class Servlet extends HttpServlet {
          request.getSession().setAttribute("users", usuarios);
          response.sendRedirect("adminusuarios.jsp");
      }
+     
+      private void buscarUsuario(HttpServletRequest request,
+            HttpServletResponse response)
+            throws SQLException, IOException {
+          String param = request.getParameter("busq_param");
+           ArrayList<Usuario> u = new ArrayList<Usuario>();
+           u = DriverBD.buscarUsuario(param, 1,u);
+           u = DriverBD.buscarUsuario(param, 2,u);
+           u = DriverBD.buscarUsuario(param, 3,u);
+          /*
+            if(DriverBD.buscarUsuario(param, 1)!=null){
+              u = DriverBD.buscarUsuario(param, 3);
+          }
+          else{
+              if(DriverBD.buscarUsuario(param, 2)!=null){
+                  
+              }
+              else{
+                  if(DriverBD.buscarUsuario(param, 3)!=null){
+                      u = DriverBD.buscarUsuario(param, 1);
+                  }
+              }
+          }
+          * 
+          */
+          if(u!=null){
+             request.getSession().setAttribute("userbuscado", u); 
+          }
+          response.sendRedirect("buscarusuario.jsp");
+      }
 }

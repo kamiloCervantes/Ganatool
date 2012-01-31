@@ -34,4 +34,34 @@ public class AdministrarSistema {
         }
         return usuarios;
     }
+    
+    public ArrayList<Usuario> buscarUsuario(ResultSet consulta, ArrayList<Usuario> usuarios) throws SQLException{
+          while(consulta.next()){
+            Usuario u = new Usuario();
+            u.setNombre(consulta.getString("nombre"));
+            u.setApellidos(consulta.getString("apellidos"));
+            u.setDocumento(consulta.getString("tipodoc"), consulta.getLong("nrodoc"));
+            u.setFoto(consulta.getString("foto"));
+            u.setEMail(consulta.getString("email"));
+            u.setDireccion(consulta.getString("direccion"));
+            u.setTelefono(consulta.getLong("telefono"));
+            u.setRol(consulta.getString("rol").charAt(0));
+            u.setFechaNac(consulta.getDate("fechanac"));
+            u.setUsuario(consulta.getString("usuario"));
+            u.setPassword(consulta.getString("password"));
+            u.setPregunta(consulta.getString("pregunta"), consulta.getString("respuesta"));
+            u.setSexo(consulta.getString("sexo").charAt(0));
+            boolean add = true;
+            for(Usuario tmp: usuarios){
+                if(tmp.getUsuario().equals(u.getUsuario())){
+                    add = false;
+                }
+            }
+            if(add){
+                usuarios.add(u);
+            }
+                
+        }
+        return usuarios;
+    }
 }
