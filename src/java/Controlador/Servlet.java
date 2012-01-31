@@ -172,6 +172,9 @@ public class Servlet extends HttpServlet {
             if (out.equals("buscarbanco.do")) {
                 buscarBancoDieta(request, response);
             }
+            if (out.equals("listarusuarios.do")) {
+                this.listarUsuarios(request, response);
+            }
         } catch (SQLException ex) {
             System.err.println(ex);
         }
@@ -812,4 +815,13 @@ public class Servlet extends HttpServlet {
         request.getSession(true).setAttribute("resultadosBanco", dietas);
         response.sendRedirect("bancodietas.jsp");
     }
+    
+    /* metodos Administrador */
+     private void listarUsuarios(HttpServletRequest request,
+            HttpServletResponse response)
+            throws SQLException, IOException {
+         ArrayList<Usuario> usuarios = DriverBD.cargarUsuarios();
+         request.getSession().setAttribute("users", usuarios);
+         response.sendRedirect("adminusuarios.jsp");
+     }
 }
