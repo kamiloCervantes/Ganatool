@@ -11,7 +11,15 @@
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel="stylesheet" type="text/css" href="nifty/niftyCorners.css">
 <link rel="stylesheet" type="text/css" href="nifty/niftyPrint.css" media="print">
+<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<link rel="stylesheet" href="validationEngine.jquery.css" type="text/css"/>
 <script src="nifty/nifty.js" type="text/javascript" language="javascript"></script>
+<script src="js/jquery-1.7.1.min.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="js/users.js" type="text/javascript" language="javascript"></script>
+<script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" language="javascript">
 onload=function()
 {
@@ -44,6 +52,30 @@ table.gestion tr.first-child{
 	background: #000;
 	color: #fff;
 	border: none;
+}
+
+#controles form{
+    display: inline;
+}
+
+.formbox{
+    width: 600px;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y:scroll;
+}
+
+.formbox label{
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.formbox input,.formbox select{
+    width: 550px;
+}
+
+.formbox input.btn{
+    width: auto;
 }
 </style>
 <script type="text/javascript">
@@ -97,6 +129,7 @@ function switchSubitem(item){
 				<hr>
 				</div>
                             <div id="controles" class="controls">
+                               <a id="adduser" href="#adduserform">Nuevo usuario</a>              
                                 <form action="buscarusuario.do" method="POST">
                                 <input type="text" name="busq_param" id="busq_param" />
                                 <input type="submit" value="Buscar"/>
@@ -119,7 +152,8 @@ function switchSubitem(item){
 						<td><%=u.getEMail() %></td>
 						<td><%=u.getRol()%></td>
 						<td>
-							<select>
+							<select id="<%=u.getUsuario()%>">
+                                                                <option>Seleccione uno...</option>
 								<option>Modificar</option>
 								<option>Eliminar</option>
 							</select>
@@ -128,7 +162,87 @@ function switchSubitem(item){
                                         <% } %>
 				</table>
 			<!-- contenido de la pgina -->
-
+                            <div style="display: none;">
+                                <div id="adduserform" class="formbox">
+                                    <div class="titulo">
+                                        <h2>Nuevo usuario</h2>
+                                        <hr>
+                                    </div>
+                                    <form method="post" id="agregarusuario" action="agregarusuario.do">
+                                    <p>
+                                        <label for="usuario">Nombre de usuario</label>
+                                        <input name="usuario" id="usuario" value="" class="validate[required,custom[onlyLetterNumber],maxSize[20]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="password">Contrase&ntilde;a</label>
+                                        <input name="password" type="password" id="password" value="" class="validate[required,maxSize[20]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="email">Email</label>
+                                        <input name="email" id="email" value="" class="validate[required,custom[email],maxSize[50]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="nombre">Nombre</label>
+                                        <input name="nombre" id="nombre" value="" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="apellidos">Apellidos</label>
+                                        <input name="apellidos" id="apellidos" value="" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="tipodoc">Tipo de documento</label>
+                                        <select name="tipodoc" id="tipodoc">
+                                            <option value="CC">Seleccione uno...</option>
+                                            <option value="RC">Registro civil</option>
+                                            <option value="TI">Tarjeta de identidad</option>
+                                            <option value="CC">Cedula de ciudadania</option>
+                                            <option value="CE">Cedula de extranjeria</option>
+                                            <option value="OO">Otro...</option>
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <label for="nrodoc">N&uacute;mero de documento</label>
+                                        <input name="nrodoc" id="nrodoc" value="" class="validate[required,custom[onlyNumberSp]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="pregunta">Pregunta de seguridad</label>
+                                        <input name="pregunta" id="pregunta" value="" class="validate[required,maxSize[100]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="respuesta">Respuesta</label>
+                                        <input name="respuesta" id="respuesta" value="" class="validate[required,maxSize[20]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="foto">Imagen de perfil</label>
+                                        <input name="foto" type="file" id="pregunta" value=""/>
+                                    </p>
+                                    <p>
+                                        <label for="direccion">Direcci&oacute;n</label>
+                                        <input name="direccion" id="direccion" value="" class="validate[optional,maxSize[50]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="telefono">Tel&eacute;fono</label>
+                                        <input name="telefono" id="telefono" value="" class="validate[optional,custom[onlyNumberSp]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="fechanac">Fecha de nacimiento</label>
+                                        <input name="fechanac" id="fechanac" value="" class="validate[optional,custom[date],past[1999-12-31]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="sexo">Sexo</label>
+                                        <select name="sexo" id="sexo">
+                                            <option>Seleccione uno...</option>
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <input type="submit" class="btn" value="Agregar usuario"/>
+                                        <input type="button" class="btn" value="Cancelar"/>
+                                    </p>
+                                    </form>
+                                </div>
+	</div>
 		         </div><!-- end #post -->
 		</div> <!-- end #content -->
 		<div id="sidebar">

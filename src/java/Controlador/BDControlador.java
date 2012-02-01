@@ -1175,4 +1175,35 @@ public class BDControlador {
         }
         return ADM.buscarUsuario(PS.executeQuery(),usuarios);
     }
+    
+    public void eliminarUsuario(String param) throws SQLException{
+        SQL = "DELETE from usuario where usuario=?";
+        PS = conexion.prepareStatement(SQL);
+        PS.setString(1, param);
+        PS.execute();
+    }
+    
+     public void agregarUsuario(HttpServletRequest request) throws SQLException {
+         SQL = "INSERT INTO usuario(usuario, nombre, apellidos, tipodoc, nrodoc, "
+             + "pregunta, foto, respuesta, email, password, rol, direccion, "
+             + "telefono, fechanac, sexo)    VALUES (?, ?, ?, ?, ?, ?, ?, "
+             + "?, ?, ?, ?, ?, ?, ?, ?)";
+         PS = conexion.prepareStatement(SQL);
+         PS.setString(1, request.getParameter("usuario"));
+         PS.setString(2, request.getParameter("nombre"));
+         PS.setString(3, request.getParameter("apellidos"));
+         PS.setString(4, request.getParameter("tipodoc"));
+         PS.setLong(5, Long.parseLong(request.getParameter("nrodoc")));
+         PS.setString(6, request.getParameter("pregunta"));
+         PS.setString(7, request.getParameter("foto"));
+         PS.setString(8, request.getParameter("respuesta"));
+         PS.setString(9, request.getParameter("email"));
+         PS.setString(10, request.getParameter("password"));
+         PS.setString(11, "v");
+         PS.setString(12, request.getParameter("direccion"));
+         PS.setLong(13, Long.parseLong(request.getParameter("telefono")));
+         PS.setDate(14, Date.valueOf(request.getParameter("fechanac")));
+         PS.setString(15, request.getParameter("sexo"));
+         PS.executeUpdate();
+     }
 }
