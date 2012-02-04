@@ -64,6 +64,53 @@ public class AdministrarSistema {
         }
         return usuarios;
     }
+  /*
+ * etapafisiologica character varying(50),
+  sexo character(1),
+  peso real,
+  ganancia real,
+  cantalimento real,
+
+  proteina real,
+  ndt real,
+  em real,
+  enmant real,
+  engan real,
+  calcio real,
+  fosforo real,
+  * 
+
+
+
+
+  forraje real,
+
+
+
+ */
+    public ArrayList<TablasNutricionalesCarne> cargarNecesidadesCarne(ResultSet consulta) throws SQLException{
+        ArrayList<TablasNutricionalesCarne> tablas = new ArrayList<TablasNutricionalesCarne>();
+        while(consulta.next()){
+        TablasNutricionalesCarne tabla = new TablasNutricionalesCarne();
+        //tabla.setId(consulta.getInt("id"));
+        tabla.setEtapafisiologica(consulta.getString("etapafisiologica"));
+        tabla.setSexo(consulta.getString("sexo").charAt(0));
+        tabla.setPeso(consulta.getDouble("peso"));
+        tabla.setGanancia(consulta.getDouble("ganancia"));
+        tabla.setCantalimento(consulta.getDouble("cantalimento"));
+        tabla.setProteina(consulta.getDouble("proteina"));
+        tabla.setNdt(consulta.getDouble("ndt"));
+        tabla.setEm(consulta.getDouble("em"));
+        tabla.setEnmant(consulta.getDouble("enmant"));
+        tabla.setEngan(consulta.getDouble("engan"));
+        tabla.setCalcio(consulta.getDouble("calcio"));
+        tabla.setFosforo(consulta.getDouble("fosforo"));
+        /* específicos de carne */
+        tabla.setForraje(consulta.getDouble("forraje"));
+        tablas.add(tabla);
+        }
+        return tablas;
+    }
     
 
 }

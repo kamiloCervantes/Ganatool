@@ -21,7 +21,7 @@ function accionusuario(){
     }
     else{
          if($(this).val()=="Modificar"){
-            alert("Modificar usuario "+$(this).val());
+            window.location='modificarusuario.do?action=1&username='+$(this).attr('id');
         }
     }
        

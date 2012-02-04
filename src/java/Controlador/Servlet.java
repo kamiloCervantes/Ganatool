@@ -184,6 +184,12 @@ public class Servlet extends HttpServlet {
             if (out.equals("agregarusuario.do")) {
                 this.agregarUsuario(request, response);
             }
+            if (out.equals("modificarusuario.do")) {
+                this.modificarUsuario(request, response);
+            }
+            if (out.equals("cargarnecesidadescarne.do")) {
+                this.cargarNecesidadesCarne(request, response);
+            }
         } catch (SQLException ex) {
             System.err.println(ex);
         }
@@ -863,5 +869,29 @@ public class Servlet extends HttpServlet {
            DriverBD.agregarUsuario(request);
            response.sendRedirect("listarusuarios.do");
            
+       }
+       
+       private void modificarUsuario(HttpServletRequest request,
+            HttpServletResponse response)
+            throws SQLException, IOException {
+           int action = Integer.parseInt(request.getParameter("action"));
+           if(action==1){
+               Usuario u = DriverBD.buscarUsuario(request.getParameter("username"));
+               request.getSession().setAttribute("user_mod", u);
+               response.sendRedirect("modificarusuario.jsp");
+           }
+           if(action==2){
+              DriverBD.modificarUsuario(request);
+              response.sendRedirect("listarusuarios.do");    
+           }
+           
+       }
+       
+       private void cargarNecesidadesCarne(HttpServletRequest request,
+            HttpServletResponse response)
+            throws SQLException, IOException { 
+           ArrayList<TablasNutricionalesCarne> tablas = DriverBD.cargarNecesidadesCarne(request);
+           request.getSession().setAttribute("tablas", tablas);
+           response.sendRedirect("admintablascarne.jsp"); 
        }
 }

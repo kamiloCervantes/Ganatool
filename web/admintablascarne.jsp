@@ -1,4 +1,5 @@
 <%@page import="Objetos.Usuario"%>
+<%@page import="Objetos.TablasNutricionalesCarne"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -91,18 +92,17 @@ function switchSubitem(item){
 </script>
  <%
               Usuario U = null;
-              ArrayList<Usuario> users = null;
+              ArrayList<TablasNutricionalesCarne> tablas = null;
               if (request.getSession().getAttribute("usuario") != null) {
                   U = (Usuario) request.getSession().getAttribute("usuario");
                   if(U.getRol()!= 'a'){
                       response.sendRedirect("panelvet.jsp");
                   }
                   else{
-                      if (request.getSession().getAttribute("users") != null) 
-                      users = (ArrayList<Usuario>) request.getSession().getAttribute("users");
-                   else 
-                      response.sendRedirect("paneladm.jsp");
-              } 
+                      tablas = (ArrayList<TablasNutricionalesCarne>) request.getSession().getAttribute("tablas");
+                      if (tablas == null) 
+                        response.sendRedirect("paneladm.jsp");
+                    } 
                 }
                   else {
                     response.sendRedirect("index.jsp");
@@ -125,37 +125,27 @@ function switchSubitem(item){
 		<div id="content">
 			<div class="post">
 				<div class="titulo">
-				<h2>Gesti&oacute;n de usuarios</h2>
+				<h2>Tablas nutricionales tipo c&aacute;rnico</h2>
 				<hr>
 				</div>
-                            <div id="controles" class="controls">
-                               <a id="adduser" href="#adduserform">Nuevo usuario</a>              
-                                <form action="buscarusuario.do" method="POST">
-                                <input type="text" name="busq_param" id="busq_param" />
-                                <input type="submit" value="Buscar"/>
-                                </form>
-                            </div>
-				<table id="usuarios" class="gestion">
+				<table id="reqnutricionales" class="gestion">
 					<tr class="first-child">
-						<td>Usuario</td>
-						<td>Nombre</td>
-						<td>Apellidos</td>
-						<td>Email</td>
-						<td>Rol</td>
+						<td>Etapa</td>
+						<td>Sexo</td>
+						<td>Peso</td>
+						<td>Ganancia</td>
 						<td>Acciones</td>
 					</tr>
-                                        <% for(Usuario u: users){ %>
+                                        <% for(TablasNutricionalesCarne t: tablas){ %>
 					<tr>
-						<td><%=u.getUsuario()%></td>
-						<td><%=u.getNombre() %></td>
-						<td><%=u.getApellidos() %></td>
-						<td><%=u.getEMail() %></td>
-						<td><%=u.getRol()%></td>
+						<td><%=t.getEtapafisiologica() %></td>
+						<td><%=t.getSexo() %></td>
+						<td><%=t.getPeso() %></td>
+						<td><%=t.getGanancia() %></td>
 						<td>
-							<select id="<%=u.getUsuario()%>">
+							<select id="<%=t.getId() %>">
                                                                 <option>Seleccione uno...</option>
 								<option>Modificar</option>
-								<option>Eliminar</option>
 							</select>
 						</td>
 					</tr>
@@ -165,76 +155,61 @@ function switchSubitem(item){
                             <div style="display: none;">
                                 <div id="adduserform" class="formbox">
                                     <div class="titulo">
-                                        <h2>Nuevo usuario</h2>
+                                        <h2>Modificar registro nutricional</h2>
                                         <hr>
                                     </div>
-                                    <form method="post" id="agregarusuario" action="agregarusuario.do">
+                                    <form method="post" id="modregnutricional" action="modregnutricional.do">
                                     <p>
-                                        <label for="usuario">Nombre de usuario</label>
-                                        <input name="usuario" id="usuario" value="" class="validate[required,custom[onlyLetterNumber],maxSize[20]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="password">Contrase&ntilde;a</label>
-                                        <input name="password" type="password" id="password" value="" class="validate[required,maxSize[20]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="email">Email</label>
-                                        <input name="email" id="email" value="" class="validate[required,custom[email],maxSize[50]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="nombre">Nombre</label>
-                                        <input name="nombre" id="nombre" value="" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
-                                    </p>
-                                     <p>
-                                        <label for="apellidos">Apellidos</label>
-                                        <input name="apellidos" id="apellidos" value="" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="tipodoc">Tipo de documento</label>
-                                        <select name="tipodoc" id="tipodoc">
-                                            <option value="CC">Seleccione uno...</option>
-                                            <option value="RC">Registro civil</option>
-                                            <option value="TI">Tarjeta de identidad</option>
-                                            <option value="CC">Cedula de ciudadania</option>
-                                            <option value="CE">Cedula de extranjeria</option>
-                                            <option value="OO">Otro...</option>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label for="nrodoc">N&uacute;mero de documento</label>
-                                        <input name="nrodoc" id="nrodoc" value="" class="validate[required,custom[onlyNumberSp]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="pregunta">Pregunta de seguridad</label>
-                                        <input name="pregunta" id="pregunta" value="" class="validate[required,maxSize[100]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="respuesta">Respuesta</label>
-                                        <input name="respuesta" id="respuesta" value="" class="validate[required,maxSize[20]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="foto">Imagen de perfil</label>
-                                        <input name="foto" type="file" id="pregunta" value=""/>
-                                    </p>
-                                    <p>
-                                        <label for="direccion">Direcci&oacute;n</label>
-                                        <input name="direccion" id="direccion" value="" class="validate[optional,maxSize[50]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="telefono">Tel&eacute;fono</label>
-                                        <input name="telefono" id="telefono" value="" class="validate[optional,custom[onlyNumberSp]]"/>
-                                    </p>
-                                     <p>
-                                        <label for="fechanac">Fecha de nacimiento</label>
-                                        <input name="fechanac" id="fechanac" value="" class="validate[optional,custom[date],past[1999-12-31]]"/>
+                                        <label for="etapafisiologica">Etapa fisiol&oacute;gica</label>
+                                        <input name="etapafisiologica" id="usuario" value="" class="validate[required,custom[onlyLetterNumber],maxSize[50]]"/>
                                     </p>
                                     <p>
                                         <label for="sexo">Sexo</label>
-                                        <select name="sexo" id="sexo">
-                                            <option>Seleccione uno...</option>
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
-                                        </select>
+                                        <input name="sexo" id="sexo" value="" class="validate[required,maxSize[1]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="peso">Peso</label>
+                                        <input name="peso" id="peso" value="" class="validate[required,custom[number]"/>
+                                    </p>
+                                    <p>
+                                        <label for="ganancia">Ganancia</label>
+                                        <input name="ganancia" id="ganancia" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="cantalimento">Cantidad de alimento</label>
+                                        <input name="cantalimento" id="cantalimento" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="forraje">Forraje</label>
+                                        <input name="forraje" id="forraje" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="proteina">Proteo&iacute;na</label>
+                                        <input name="proteina" id="proteina" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="ndt">NDT</label>
+                                        <input name="ndt" id="ndt" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="em">EM</label>
+                                        <input name="em" id="em" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="enmant">Enmant</label>
+                                        <input name="enmant" id="enmant" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="engan">Engan</label>
+                                        <input name="engan" id="engan" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="calcio">Calcio</label>
+                                        <input name="calcio" id="calcio" value="" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="fosforo">F&oacute;sforo</label>
+                                        <input name="fosforo" id="fosforo" value="" class="validate[required,custom[number]]"/>
                                     </p>
                                     <p>
                                         <input type="submit" class="btn" value="Agregar usuario"/>
@@ -249,12 +224,12 @@ function switchSubitem(item){
 			<div class="contenedorlistaadm">
 				<ul>
   					<li><a href="paneladm.jsp">Home</a></li>
-   					<li class="current"> <a href="listarusuarios.do">Usuarios</a></li>
-  					 <li><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
+   					<li> <a href="listarusuarios.do">Usuarios</a></li>
+  					 <li class="current"><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
    				<div id="contenedorsubitem2">
 					<ul>
    						<li> <a href="#">Tabla nutricional leche</a></li>
-   						<li> <a href="#"></a>Tabla nutricional carne</li>
+   						<li> <a href="cargarnecesidadescarne.do"></a>Tabla nutricional carne</li>
  					</ul>
    				</div>
 					<li><a href="cerrarsesion.do">Salir del sistema</a></li>

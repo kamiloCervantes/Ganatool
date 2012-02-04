@@ -1176,6 +1176,11 @@ public class BDControlador {
         return ADM.buscarUsuario(PS.executeQuery(),usuarios);
     }
     
+    public Usuario buscarUsuario(String param) throws SQLException{
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+        return this.buscarUsuario(param,1,usuarios).get(0);
+    }
+    
     public void eliminarUsuario(String param) throws SQLException{
         SQL = "DELETE from usuario where usuario=?";
         PS = conexion.prepareStatement(SQL);
@@ -1205,5 +1210,37 @@ public class BDControlador {
          PS.setDate(14, Date.valueOf(request.getParameter("fechanac")));
          PS.setString(15, request.getParameter("sexo"));
          PS.executeUpdate();
+     }
+     
+     public void modificarUsuario(HttpServletRequest request) throws SQLException {
+         SQL = "UPDATE usuario SET nombre=?, apellidos=?, tipodoc=?, "
+                 + "nrodoc=?, pregunta=?, foto=?, respuesta=?, email=?, "
+                 + "password=?, rol=?, direccion=?, telefono=?, fechanac=?, sexo=?"
+                 + "where usuario=?";
+         PS = conexion.prepareStatement(SQL);
+         PS.setString(1, request.getParameter("nombre"));
+         PS.setString(2, request.getParameter("apellidos"));
+         PS.setString(3, request.getParameter("tipodoc"));
+         PS.setLong(4, Long.parseLong(request.getParameter("nrodoc")));
+         PS.setString(5, request.getParameter("pregunta"));
+         PS.setString(6, request.getParameter("foto"));
+         PS.setString(7, request.getParameter("respuesta"));
+         PS.setString(8, request.getParameter("email"));
+         PS.setString(9, request.getParameter("password"));
+         PS.setString(10, "v");
+         PS.setString(11, request.getParameter("direccion"));
+         PS.setLong(12, Long.parseLong(request.getParameter("telefono")));
+         PS.setDate(13, Date.valueOf(request.getParameter("fechanac")));
+         PS.setString(14, request.getParameter("sexo"));
+         PS.setString(15, request.getParameter("usuario"));
+         PS.executeUpdate();
+         
+     }
+     
+     public ArrayList<TablasNutricionalesCarne> cargarNecesidadesCarne(HttpServletRequest request) throws SQLException {
+         SQL = "SELECT * FROM tablanutricionalcarne";
+         PS = conexion.prepareStatement(SQL);
+         return ADM.cargarNecesidadesCarne(PS.executeQuery());
+         
      }
 }

@@ -86,12 +86,16 @@ function switchSubitem(item){
 }
 </script>
 <%
-              Usuario U = null;
+               Usuario U = null;
               if (request.getSession().getAttribute("usuario") != null) {
                   U = (Usuario) request.getSession().getAttribute("usuario");
-              } else {
-                  response.sendRedirect("index.jsp");
-              }
+                  if(U.getRol()!= 'a'){
+                      response.sendRedirect("panelvet.jsp");
+                  }
+                }
+                  else {
+                    response.sendRedirect("index.jsp");
+                 } 
   %>
 </head>
 <body>
@@ -113,11 +117,9 @@ function switchSubitem(item){
 				<h2>Panel de administraci&oacute;n del sistema</h2>
 				<hr>
 				</div>
-			<ul id="menuadm">	
-				<li id="home">Home</li>
-				<li id="users" onclick="window.location='listarusuarios.do'">Usuarios</li>
-				<li id="tablas" onclick="window.location='tablasnutricionales.jsp'">Tablas Nutricionales</li>
-				<li id="salir">Salir</li>
+			<ul id="menuadm">
+				<li id="tablascarne" onclick="window.location='cargarnecesidadescarne.do'">Tablas Nutricionales Carne</li>
+                                <li id="tablasleche" onclick="window.location='cargarnecesidadesleche.do'">Tablas Nutricionales Leche</li>
 				</ul>
 
 		         </div><!-- end #post -->
@@ -125,9 +127,9 @@ function switchSubitem(item){
 		<div id="sidebar">
 			<div class="contenedorlistaadm">
 				<ul>
-  					<li class="current"><a href="paneladm.jsp">Home</a></li>
+  					<li><a href="paneladm.jsp">Home</a></li>
    					<li> <a href="listarusuarios.do">Usuarios</a></li>
-  					 <li><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
+  					 <li class="current"><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
    				<div id="contenedorsubitem2">
 					<ul>
    						<li> <a href="#">Tabla nutricional leche</a></li>

@@ -97,12 +97,6 @@ function switchSubitem(item){
                   if(U.getRol()!= 'a'){
                       response.sendRedirect("panelvet.jsp");
                   }
-                  else{
-                      if (request.getSession().getAttribute("users") != null) 
-                      users = (ArrayList<Usuario>) request.getSession().getAttribute("users");
-                   else 
-                      response.sendRedirect("paneladm.jsp");
-              } 
                 }
                   else {
                     response.sendRedirect("index.jsp");
@@ -125,74 +119,38 @@ function switchSubitem(item){
 		<div id="content">
 			<div class="post">
 				<div class="titulo">
-				<h2>Gesti&oacute;n de usuarios</h2>
+				<h2>Modificar usuario</h2>
 				<hr>
-				</div>
-                            <div id="controles" class="controls">
-                               <a id="adduser" href="#adduserform">Nuevo usuario</a>              
-                                <form action="buscarusuario.do" method="POST">
-                                <input type="text" name="busq_param" id="busq_param" />
-                                <input type="submit" value="Buscar"/>
-                                </form>
-                            </div>
-				<table id="usuarios" class="gestion">
-					<tr class="first-child">
-						<td>Usuario</td>
-						<td>Nombre</td>
-						<td>Apellidos</td>
-						<td>Email</td>
-						<td>Rol</td>
-						<td>Acciones</td>
-					</tr>
-                                        <% for(Usuario u: users){ %>
-					<tr>
-						<td><%=u.getUsuario()%></td>
-						<td><%=u.getNombre() %></td>
-						<td><%=u.getApellidos() %></td>
-						<td><%=u.getEMail() %></td>
-						<td><%=u.getRol()%></td>
-						<td>
-							<select id="<%=u.getUsuario()%>">
-                                                                <option>Seleccione uno...</option>
-								<option>Modificar</option>
-								<option>Eliminar</option>
-							</select>
-						</td>
-					</tr>
-                                        <% } %>
-				</table>
+                                </div>
+			
 			<!-- contenido de la pgina -->
-                            <div style="display: none;">
-                                <div id="adduserform" class="formbox">
-                                    <div class="titulo">
-                                        <h2>Nuevo usuario</h2>
-                                        <hr>
-                                    </div>
-                                    <form method="post" id="agregarusuario" action="agregarusuario.do">
-                                    <p>
-                                        <label for="usuario">Nombre de usuario</label>
-                                        <input name="usuario" id="usuario" value="" class="validate[required,custom[onlyLetterNumber],maxSize[20]]"/>
-                                    </p>
+                            <% 
+                                if (request.getSession().getAttribute("user_mod") != null){
+                                    Usuario mod = (Usuario) request.getSession().getAttribute("user_mod"); %>
+                             
+                                <div id="moduserform" class="formbox">
+                                    <form method="post" id="modificarusuario" name="modificarusuario" action="modificarusuario.do?action=2">
+                                        <input name="usuario" id="usuario" type="hidden" value="<%=mod.getUsuario() %>"
                                     <p>
                                         <label for="password">Contrase&ntilde;a</label>
-                                        <input name="password" type="password" id="password" value="" class="validate[required,maxSize[20]]"/>
+                                        <input name="password" id="password" value="<%=mod.getPassword()%>" class="validate[required,maxSize[20]]"/>
                                     </p>
                                     <p>
                                         <label for="email">Email</label>
-                                        <input name="email" id="email" value="" class="validate[required,custom[email],maxSize[50]]"/>
+                                        <input name="email" id="email" value="<%=mod.getEMail()%>" class="validate[required,custom[email],maxSize[50]]"/>
                                     </p>
                                     <p>
                                         <label for="nombre">Nombre</label>
-                                        <input name="nombre" id="nombre" value="" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
+                                        <input name="nombre" id="nombre" value="<%=mod.getNombre()%>" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
                                     </p>
                                      <p>
                                         <label for="apellidos">Apellidos</label>
-                                        <input name="apellidos" id="apellidos" value="" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
+                                        <input name="apellidos" id="apellidos" value="<%=mod.getApellidos()%>" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
                                     </p>
                                     <p>
                                         <label for="tipodoc">Tipo de documento</label>
                                         <select name="tipodoc" id="tipodoc">
-                                            <option value="CC">Seleccione uno...</option>
+                                            <option value="<%=mod.getTipoDoc()%>">Seleccione uno...</option>
                                             <option value="RC">Registro civil</option>
                                             <option value="TI">Tarjeta de identidad</option>
                                             <option value="CC">Cedula de ciudadania</option>
@@ -202,15 +160,15 @@ function switchSubitem(item){
                                     </p>
                                     <p>
                                         <label for="nrodoc">N&uacute;mero de documento</label>
-                                        <input name="nrodoc" id="nrodoc" value="" class="validate[required,custom[onlyNumberSp]]"/>
+                                        <input name="nrodoc" id="nrodoc" value="<%=mod.getNroDoc() %>" class="validate[required,custom[onlyNumberSp]]"/>
                                     </p>
                                     <p>
                                         <label for="pregunta">Pregunta de seguridad</label>
-                                        <input name="pregunta" id="pregunta" value="" class="validate[required,maxSize[100]]"/>
+                                        <input name="pregunta" id="pregunta" value="<%=mod.getPregunta() %>" class="validate[required,maxSize[100]]"/>
                                     </p>
                                     <p>
                                         <label for="respuesta">Respuesta</label>
-                                        <input name="respuesta" id="respuesta" value="" class="validate[required,maxSize[20]]"/>
+                                        <input name="respuesta" id="respuesta" value="<%=mod.getRespuesta()%>" class="validate[required,maxSize[20]]"/>
                                     </p>
                                     <p>
                                         <label for="foto">Imagen de perfil</label>
@@ -218,31 +176,33 @@ function switchSubitem(item){
                                     </p>
                                     <p>
                                         <label for="direccion">Direcci&oacute;n</label>
-                                        <input name="direccion" id="direccion" value="" class="validate[optional,maxSize[50]]"/>
+                                        <input name="direccion" id="direccion" value="<%=mod.getDireccion()%>" class="validate[optional,maxSize[50]]"/>
                                     </p>
                                     <p>
                                         <label for="telefono">Tel&eacute;fono</label>
-                                        <input name="telefono" id="telefono" value="" class="validate[optional,custom[onlyNumberSp]]"/>
+                                        <input name="telefono" id="telefono" value="<%=mod.getTelefono()%>" class="validate[optional,custom[onlyNumberSp]]"/>
                                     </p>
                                      <p>
                                         <label for="fechanac">Fecha de nacimiento</label>
-                                        <input name="fechanac" id="fechanac" value="" class="validate[optional,custom[date],past[1999-12-31]]"/>
+                                        <input name="fechanac" id="fechanac" value="<%=mod.getFechaNac()%>" class="validate[optional,custom[date],past[1999-12-31]]"/>
                                     </p>
                                     <p>
                                         <label for="sexo">Sexo</label>
                                         <select name="sexo" id="sexo">
-                                            <option>Seleccione uno...</option>
+                                            <option value="<%=mod.getSexo()%>">Seleccione uno...</option>
                                             <option value="M">Masculino</option>
                                             <option value="F">Femenino</option>
                                         </select>
                                     </p>
                                     <p>
-                                        <input type="submit" class="btn" value="Agregar usuario"/>
+                                        <input type="submit" class="btn" value="Modificar usuario"/>
                                         <input type="button" class="btn" value="Cancelar" onclick="window.location='listarusuarios.do'"/>
                                     </p>
                                     </form>
                                 </div>
-                            </div>
+                            <%     
+                                    }
+                            %>
 		         </div><!-- end #post -->
 		</div> <!-- end #content -->
 		<div id="sidebar">
