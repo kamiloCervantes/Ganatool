@@ -18,7 +18,7 @@
 <script src="js/jquery-1.7.1.min.js" type="text/javascript" language="javascript"></script>
 <script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
 <script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-<script src="js/users.js" type="text/javascript" language="javascript"></script>
+<script src="js/tablascarne.js" type="text/javascript" language="javascript"></script>
 <script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" language="javascript">
@@ -116,7 +116,7 @@ function switchSubitem(item){
 				<tr>
 					<td><h1><a href="#">Ganatool </a></h1></td>
 					<td class="mid"><h2>Herramienta para realizar balanceo de dietas de ganado vacuno</h2></td>
-					<td id="conexion"><a href="perfil.jsp"><%=U.getUsuario()%></a></td>
+					<td id="conexion"><a href="#"><%=U.getUsuario()%></a></td>
 				</tr>
 			</table>
 		</div> <!-- end #logo-user -->
@@ -130,6 +130,7 @@ function switchSubitem(item){
 				</div>
 				<table id="reqnutricionales" class="gestion">
 					<tr class="first-child">
+                                                <td>Id</td>
 						<td>Etapa</td>
 						<td>Sexo</td>
 						<td>Peso</td>
@@ -138,6 +139,7 @@ function switchSubitem(item){
 					</tr>
                                         <% for(TablasNutricionalesCarne t: tablas){ %>
 					<tr>
+                                                <td><%=t.getId() %></td>
 						<td><%=t.getEtapafisiologica() %></td>
 						<td><%=t.getSexo() %></td>
 						<td><%=t.getPeso() %></td>
@@ -152,72 +154,7 @@ function switchSubitem(item){
                                         <% } %>
 				</table>
 			<!-- contenido de la pgina -->
-                            <div style="display: none;">
-                                <div id="adduserform" class="formbox">
-                                    <div class="titulo">
-                                        <h2>Modificar registro nutricional</h2>
-                                        <hr>
-                                    </div>
-                                    <form method="post" id="modregnutricional" action="modregnutricional.do">
-                                    <p>
-                                        <label for="etapafisiologica">Etapa fisiol&oacute;gica</label>
-                                        <input name="etapafisiologica" id="usuario" value="" class="validate[required,custom[onlyLetterNumber],maxSize[50]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="sexo">Sexo</label>
-                                        <input name="sexo" id="sexo" value="" class="validate[required,maxSize[1]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="peso">Peso</label>
-                                        <input name="peso" id="peso" value="" class="validate[required,custom[number]"/>
-                                    </p>
-                                    <p>
-                                        <label for="ganancia">Ganancia</label>
-                                        <input name="ganancia" id="ganancia" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                     <p>
-                                        <label for="cantalimento">Cantidad de alimento</label>
-                                        <input name="cantalimento" id="cantalimento" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="forraje">Forraje</label>
-                                        <input name="forraje" id="forraje" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="proteina">Proteo&iacute;na</label>
-                                        <input name="proteina" id="proteina" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="ndt">NDT</label>
-                                        <input name="ndt" id="ndt" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="em">EM</label>
-                                        <input name="em" id="em" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="enmant">Enmant</label>
-                                        <input name="enmant" id="enmant" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                     <p>
-                                        <label for="engan">Engan</label>
-                                        <input name="engan" id="engan" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="calcio">Calcio</label>
-                                        <input name="calcio" id="calcio" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="fosforo">F&oacute;sforo</label>
-                                        <input name="fosforo" id="fosforo" value="" class="validate[required,custom[number]]"/>
-                                    </p>
-                                    <p>
-                                        <input type="submit" class="btn" value="Agregar usuario"/>
-                                        <input type="button" class="btn" value="Cancelar" onclick="window.location='listarusuarios.do'"/>
-                                    </p>
-                                    </form>
-                                </div>
-                            </div>
+                            
 		         </div><!-- end #post -->
 		</div> <!-- end #content -->
 		<div id="sidebar">
@@ -228,8 +165,8 @@ function switchSubitem(item){
   					 <li class="current"><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
    				<div id="contenedorsubitem2">
 					<ul>
-   						<li> <a href="#">Tabla nutricional leche</a></li>
-   						<li> <a href="cargarnecesidadescarne.do"></a>Tabla nutricional carne</li>
+   						<li> <a href="cargarnecesidadesleche.do">Tabla nutricional leche</a></li>
+   						<li> <a href="cargarnecesidadescarne.do">Tabla nutricional carne</a></li>
  					</ul>
    				</div>
 					<li><a href="cerrarsesion.do">Salir del sistema</a></li>
@@ -250,8 +187,8 @@ function switchSubitem(item){
 	</div><!-- end #page -->
 	<div id="footer-bgcontent-adm">
 		<div id="footer-adm">
-		<p>Copyright (c) 2010 Grupo 64 bits Dise&ntilde;o por FCT y Kamilo Cervantes
-	<br>Desarrollado por: Jeyra Beltr&aacute;n Sierra | Camilo Cervantes Salazar | Jes&uacute;s Miguel Herazo Hoyos</p>	
+		<p>Desarrollado por: Jeyra Beltr&aacute;n Sierra | Camilo Cervantes Salazar | 
+                Jes&uacute;s Miguel Herazo Hoyos<br/>&copy; 2012 Universidad de C&oacute;rdoba</p>	
 	</div><!-- end #footer -->
 	</div> <!-- end #footer-bgcontent -->	
         <div id="mensajesAyuda">

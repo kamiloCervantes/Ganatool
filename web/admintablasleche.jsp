@@ -1,4 +1,6 @@
 <%@page import="Objetos.Usuario"%>
+<%@page import="Objetos.TablasNutricionalesLeche"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +12,15 @@
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <link rel="stylesheet" type="text/css" href="nifty/niftyCorners.css">
 <link rel="stylesheet" type="text/css" href="nifty/niftyPrint.css" media="print">
+<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<link rel="stylesheet" href="validationEngine.jquery.css" type="text/css"/>
 <script src="nifty/nifty.js" type="text/javascript" language="javascript"></script>
+<script src="js/jquery-1.7.1.min.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="js/tablasleche.js" type="text/javascript" language="javascript"></script>
+<script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" language="javascript">
 onload=function()
 {
@@ -31,57 +41,42 @@ onload=function()
 	border: 1px solid green;
 }
 
-#menuadm{
+table.gestion{
 	width: 100%;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	text-align: center;
-	margin-top: 20px;
-}
-
-#menuadm li{
-	padding: 5%;
-	border: 1px dotted green;
+	border: 1px solid #ccc;
 	font-family: Arial, sans-serif;
 	font-size: 16px;
-	font-weight: bold;
-	margin-bottom: 10px;
-	cursor: pointer;
+	text-align: center;
 }
 
-#menuadm li#home{
-	background: url('images/home.png') no-repeat 0px 20px, url('images/home.png') no-repeat 100% 20px;
-	background-color: #fff;
-	}
+table.gestion tr.first-child{
+	background: #000;
+	color: #fff;
+	border: none;
+}
 
-#menuadm li#users{
-	background: url('images/users.png') no-repeat 0px 20px, url('images/users.png') no-repeat 100% 20px;
-	background-color: #fff;
-	}
-	
-#menuadm li#tablas{
-	background: url('images/tablas.png') no-repeat 0px 20px, url('images/tablas.png') no-repeat 100% 20px;
-	background-color: #fff;
-	}
+#controles form{
+    display: inline;
+}
 
-#menuadm li#salir{
-	background: url('images/salir.png') no-repeat 0px 20px, url('images/salir.png') no-repeat 100% 20px;
-	background-color: #fff;
-	}
-        
-#menuadm li#tablascarne{
-	background: url('images/vaca.png') no-repeat 0px 20px, url('images/vaca.png') no-repeat 100% 20px;
-	background-color: #fff;
-	}
-        
-#menuadm li#tablasleche{
-	background: url('images/leche.png') no-repeat 0px 20px, url('images/leche.png') no-repeat 100% 20px;
-	background-color: #fff;
-	}
+.formbox{
+    width: 600px;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y:scroll;
+}
 
-#menuadm li#home:hover, #menuadm li#users:hover, #menuadm li#tablas:hover, #menuadm li#salir:hover, #menuadm li#tablascarne:hover, #menuadm li#tablasleche:hover{
-	background-color: #c4f6cf;
+.formbox label{
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.formbox input,.formbox select{
+    width: 550px;
+}
+
+.formbox input.btn{
+    width: auto;
 }
 </style>
 <script type="text/javascript">
@@ -95,13 +90,19 @@ function switchSubitem(item){
 			subitem.style.display="block";}
 }
 </script>
-<%
-               Usuario U = null;
+ <%
+              Usuario U = null;
+              ArrayList<TablasNutricionalesLeche> tablas = null;
               if (request.getSession().getAttribute("usuario") != null) {
                   U = (Usuario) request.getSession().getAttribute("usuario");
                   if(U.getRol()!= 'a'){
                       response.sendRedirect("panelvet.jsp");
                   }
+                  else{
+                      tablas = (ArrayList<TablasNutricionalesLeche>) request.getSession().getAttribute("tablas");
+                      if (tablas == null) 
+                        response.sendRedirect("paneladm.jsp");
+                    } 
                 }
                   else {
                     response.sendRedirect("index.jsp");
@@ -115,7 +116,7 @@ function switchSubitem(item){
 				<tr>
 					<td><h1><a href="#">Ganatool </a></h1></td>
 					<td class="mid"><h2>Herramienta para realizar balanceo de dietas de ganado vacuno</h2></td>
-					<td id="conexion"><%=U.getUsuario()%></td>
+					<td id="conexion"><a href="#"><%=U.getUsuario()%></a></td>
 				</tr>
 			</table>
 		</div> <!-- end #logo-user -->
@@ -123,15 +124,37 @@ function switchSubitem(item){
 	<div id="page">
 		<div id="content">
 			<div class="post">
-			<div class="titulo">
-				<h2>Panel de administraci&oacute;n del sistema</h2>
+				<div class="titulo">
+				<h2>Tablas nutricionales tipo l&aacute;cteo</h2>
 				<hr>
 				</div>
-			<ul id="menuadm">
-				<li id="tablascarne" onclick="window.location='cargarnecesidadescarne.do'">Tablas Nutricionales Carne</li>
-                                <li id="tablasleche" onclick="window.location='cargarnecesidadesleche.do'">Tablas Nutricionales Leche</li>
-				</ul>
-
+				<table id="reqnutricionales" class="gestion">
+					<tr class="first-child">
+                                                <td>Id</td>
+						<td>Etapa</td>
+						<td>Sexo</td>
+						<td>Peso</td>
+						<td>Ganancia</td>
+						<td>Acciones</td>
+					</tr>
+                                        <% for(TablasNutricionalesLeche t: tablas){ %>
+					<tr>
+                                                <td><%=t.getId() %></td>
+						<td><%=t.getEtapafisiologica() %></td>
+						<td><%=t.getSexo() %></td>
+						<td><%=t.getPeso() %></td>
+						<td><%=t.getGanancia() %></td>
+						<td>
+							<select id="<%=t.getId() %>">
+                                                                <option>Seleccione uno...</option>
+								<option>Modificar</option>
+							</select>
+						</td>
+					</tr>
+                                        <% } %>
+				</table>
+			<!-- contenido de la pgina -->
+                            
 		         </div><!-- end #post -->
 		</div> <!-- end #content -->
 		<div id="sidebar">
@@ -159,6 +182,7 @@ function switchSubitem(item){
 			</tr>
 		</table>
        		</div><!-- end #sidebar -->
+			
 		<div style="clear: both;">&nbsp;</div>
 	</div><!-- end #page -->
 	<div id="footer-bgcontent-adm">

@@ -1227,7 +1227,7 @@ public class BDControlador {
          PS.setString(7, request.getParameter("respuesta"));
          PS.setString(8, request.getParameter("email"));
          PS.setString(9, request.getParameter("password"));
-         PS.setString(10, "v");
+         PS.setString(10, request.getParameter("rol"));
          PS.setString(11, request.getParameter("direccion"));
          PS.setLong(12, Long.parseLong(request.getParameter("telefono")));
          PS.setDate(13, Date.valueOf(request.getParameter("fechanac")));
@@ -1238,9 +1238,78 @@ public class BDControlador {
      }
      
      public ArrayList<TablasNutricionalesCarne> cargarNecesidadesCarne(HttpServletRequest request) throws SQLException {
-         SQL = "SELECT * FROM tablanutricionalcarne";
+         SQL = "SELECT * FROM tablanutricionalcarne order by id";
          PS = conexion.prepareStatement(SQL);
-         return ADM.cargarNecesidadesCarne(PS.executeQuery());
-         
+         return ADM.cargarNecesidadesCarne(PS.executeQuery());   
      }
+     
+     public TablasNutricionalesCarne buscarRegistroCarne(int id) throws SQLException{
+         SQL = "SELECT * FROM tablanutricionalcarne WHERE id=?";
+         PS = conexion.prepareStatement(SQL);
+         PS.setInt(1, id);
+         return ADM.buscarRegistroCarne(PS.executeQuery());
+     }
+     
+     public void actualizarTablasCarne(HttpServletRequest request) throws SQLException{
+         SQL = "UPDATE tablanutricionalcarne SET etapafisiologica=?, sexo=?, peso=?, "
+                 + "ganancia=?, cantalimento=?, forraje=?, proteina=?, ndt=?, em=?, "
+                 + "enmant=?, engan=?, calcio=?, fosforo=? WHERE id=?";
+         PS = conexion.prepareStatement(SQL);
+         PS.setString(1, request.getParameter("etapafisiologica"));
+         PS.setString(2, request.getParameter("sexo"));
+         PS.setDouble(3, Double.parseDouble(request.getParameter("peso")));
+         PS.setDouble(4, Double.parseDouble(request.getParameter("ganancia")));
+         PS.setDouble(5, Double.parseDouble(request.getParameter("cantalimento")));
+         PS.setDouble(6, Double.parseDouble(request.getParameter("forraje")));
+         PS.setDouble(7, Double.parseDouble(request.getParameter("proteina")));
+         PS.setDouble(8, Double.parseDouble(request.getParameter("ndt")));
+         PS.setDouble(9, Double.parseDouble(request.getParameter("em")));
+         PS.setDouble(10, Double.parseDouble(request.getParameter("enmant")));
+         PS.setDouble(11, Double.parseDouble(request.getParameter("engan")));
+         PS.setDouble(12, Double.parseDouble(request.getParameter("calcio")));
+         PS.setDouble(13, Double.parseDouble(request.getParameter("fosforo")));
+         PS.setInt(14, Integer.parseInt(request.getParameter("id")));
+         PS.executeUpdate();
+     }
+     
+     public ArrayList<TablasNutricionalesLeche> cargarNecesidadesLeche(HttpServletRequest request) throws SQLException {
+         SQL = "SELECT * FROM tablanutricionalleche order by id";
+         PS = conexion.prepareStatement(SQL);
+         return ADM.cargarNecesidadesLeche(PS.executeQuery());
+     }
+     
+     public TablasNutricionalesLeche buscarRegistroLeche(int id) throws SQLException{
+         SQL = "SELECT * FROM tablanutricionalleche WHERE id=?";
+         PS = conexion.prepareStatement(SQL);
+         PS.setInt(1, id);
+         return ADM.buscarRegistroLeche(PS.executeQuery());
+     }
+     
+     public void actualizarTablasLeche(HttpServletRequest request) throws SQLException{
+         SQL = "UPDATE tablanutricionalleche  SET etapafisiologica=?, sexo=?, "
+                 + "peso=?, ganancia=?, cantalimento=?, proteina=?, ndt=?, ed=?, "
+                 + "em=?, enmant=?, engan=?, enlact=?, calcio=?, fosforo=?, "
+                 + "vitaminaa=?, vitaminad=? WHERE id=?";
+         PS = conexion.prepareStatement(SQL);
+         PS.setString(1, request.getParameter("etapafisiologica"));
+         PS.setString(2, request.getParameter("sexo"));
+         PS.setDouble(3, Double.parseDouble(request.getParameter("peso")));
+         PS.setDouble(4, Double.parseDouble(request.getParameter("ganancia")));
+         PS.setDouble(5, Double.parseDouble(request.getParameter("cantalimento")));   
+         PS.setDouble(6, Double.parseDouble(request.getParameter("proteina")));
+         PS.setDouble(7, Double.parseDouble(request.getParameter("ndt")));
+         PS.setDouble(8, Double.parseDouble(request.getParameter("ed")));
+         PS.setDouble(9, Double.parseDouble(request.getParameter("em")));
+         PS.setDouble(10, Double.parseDouble(request.getParameter("enmant")));
+         PS.setDouble(11, Double.parseDouble(request.getParameter("engan")));
+         PS.setDouble(12, Double.parseDouble(request.getParameter("enlact")));
+         PS.setDouble(13, Double.parseDouble(request.getParameter("calcio")));
+         PS.setDouble(14, Double.parseDouble(request.getParameter("fosforo")));
+         PS.setDouble(15, Double.parseDouble(request.getParameter("vitaminaa")));
+         PS.setDouble(16, Double.parseDouble(request.getParameter("vitaminad")));
+         PS.setInt(17, Integer.parseInt(request.getParameter("id")));
+         PS.executeUpdate();
+     }
+     
+     
 }

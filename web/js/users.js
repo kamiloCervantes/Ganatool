@@ -8,7 +8,11 @@ function init(){
     $('#usuarios select').on('change',accionusuario);
     $("#adduser").fancybox();
     $("#agregarusuario").validationEngine();
+    $("#modificarusuario").validationEngine();
     $("#adduserform").on('scroll', function(){
+        $("#agregarusuario").validationEngine('hide');
+    });
+     $("#moduserform").on('scroll', function(){
         $("#agregarusuario").validationEngine('hide');
     });
 }

@@ -190,6 +190,15 @@ public class Servlet extends HttpServlet {
             if (out.equals("cargarnecesidadescarne.do")) {
                 this.cargarNecesidadesCarne(request, response);
             }
+            if (out.equals("modificarregistrocarne.do")) {
+                this.modificarRegistroCarne(request, response);
+            }
+            if (out.equals("cargarnecesidadesleche.do")) {
+                this.cargarNecesidadesLeche(request, response);
+            }
+            if (out.equals("modificarregistroleche.do")) {
+                this.modificarRegistroLeche(request, response);
+            }
         } catch (SQLException ex) {
             System.err.println(ex);
         }
@@ -330,7 +339,7 @@ public class Servlet extends HttpServlet {
             HttpServletResponse response)
             throws SQLException, IOException {
         usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
-        DriverBD.subirImagen(request);
+ //       DriverBD.subirImagen(request);
         int state = DriverBD.modificarUsuario(request, usuarioActual);
         if (state == 0) {
             response.sendRedirect("perfil.jsp");
@@ -894,4 +903,44 @@ public class Servlet extends HttpServlet {
            request.getSession().setAttribute("tablas", tablas);
            response.sendRedirect("admintablascarne.jsp"); 
        }
+       
+       private void modificarRegistroCarne(HttpServletRequest request,
+            HttpServletResponse response)
+            throws SQLException, IOException { 
+           int action = Integer.parseInt(request.getParameter("action"));
+           if(action==1){
+               int id = Integer.parseInt(request.getParameter("id"));
+               TablasNutricionalesCarne registro = DriverBD.buscarRegistroCarne(id);
+               request.getSession().setAttribute("tablas", registro);
+               response.sendRedirect("modificartablascarne.jsp"); 
+           }
+           if(action==2){
+               DriverBD.actualizarTablasCarne(request);
+               response.sendRedirect("cargarnecesidadescarne.do"); 
+           }
+       }
+       
+        private void cargarNecesidadesLeche(HttpServletRequest request,
+            HttpServletResponse response)
+            throws SQLException, IOException { 
+            ArrayList<TablasNutricionalesLeche> tablas = DriverBD.cargarNecesidadesLeche(request);
+           request.getSession().setAttribute("tablas", tablas);
+           response.sendRedirect("admintablasleche.jsp"); 
+        }
+        
+        private void modificarRegistroLeche(HttpServletRequest request,
+            HttpServletResponse response)
+            throws SQLException, IOException { 
+            int action = Integer.parseInt(request.getParameter("action"));
+           if(action==1){
+               int id = Integer.parseInt(request.getParameter("id"));
+               TablasNutricionalesLeche registro = DriverBD.buscarRegistroLeche(id);
+               request.getSession().setAttribute("tablas", registro);
+               response.sendRedirect("modificartablasleche.jsp"); 
+           }
+           if(action==2){
+               DriverBD.actualizarTablasCarne(request);
+               response.sendRedirect("cargarnecesidadescarne.do"); 
+           }
+        }
 }

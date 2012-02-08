@@ -9,11 +9,13 @@ package Objetos;
  * @author Usuario
  */
 public class TablasNutricionalesCarne extends TablasNutricionales{
+   
     private double forraje;
     
     public TablasNutricionalesCarne(){
         super();
-        forraje=0;
+        forraje = 0;
+       
     }
 
     /**
@@ -29,4 +31,6 @@ public class TablasNutricionalesCarne extends TablasNutricionales{
     public void setForraje(double forraje) {
         this.forraje = forraje;
     }
+
+
 }

@@ -83,7 +83,7 @@ public class AdministrarSistema {
 
 
 
-  forraje real,
+  ed,enlact,vitamina a,vitamina d
 
 
 
@@ -92,7 +92,7 @@ public class AdministrarSistema {
         ArrayList<TablasNutricionalesCarne> tablas = new ArrayList<TablasNutricionalesCarne>();
         while(consulta.next()){
         TablasNutricionalesCarne tabla = new TablasNutricionalesCarne();
-        //tabla.setId(consulta.getInt("id"));
+        tabla.setId(consulta.getInt("id"));
         tabla.setEtapafisiologica(consulta.getString("etapafisiologica"));
         tabla.setSexo(consulta.getString("sexo").charAt(0));
         tabla.setPeso(consulta.getDouble("peso"));
@@ -112,5 +112,78 @@ public class AdministrarSistema {
         return tablas;
     }
     
+    public TablasNutricionalesCarne buscarRegistroCarne(ResultSet consulta) throws SQLException{
+        TablasNutricionalesCarne tabla = new TablasNutricionalesCarne();
+        if(consulta.next()){
+        tabla.setId(consulta.getInt("id"));
+        tabla.setEtapafisiologica(consulta.getString("etapafisiologica"));
+        tabla.setSexo(consulta.getString("sexo").charAt(0));
+        tabla.setPeso(consulta.getDouble("peso"));
+        tabla.setGanancia(consulta.getDouble("ganancia"));
+        tabla.setCantalimento(consulta.getDouble("cantalimento"));
+        tabla.setProteina(consulta.getDouble("proteina"));
+        tabla.setNdt(consulta.getDouble("ndt"));
+        tabla.setEm(consulta.getDouble("em"));
+        tabla.setEnmant(consulta.getDouble("enmant"));
+        tabla.setEngan(consulta.getDouble("engan"));
+        tabla.setCalcio(consulta.getDouble("calcio"));
+        tabla.setFosforo(consulta.getDouble("fosforo"));
+        /* específicos de carne */
+        tabla.setForraje(consulta.getDouble("forraje"));
+        }
+        return tabla;
+    }
+    
+     public ArrayList<TablasNutricionalesLeche> cargarNecesidadesLeche(ResultSet consulta) throws SQLException{
+         ArrayList<TablasNutricionalesLeche> tablas = new ArrayList<TablasNutricionalesLeche>();
+        while(consulta.next()){
+        TablasNutricionalesLeche tabla = new TablasNutricionalesLeche();
+        tabla.setId(consulta.getInt("id"));
+        tabla.setEtapafisiologica(consulta.getString("etapafisiologica"));
+        tabla.setSexo(consulta.getString("sexo").charAt(0));
+        tabla.setPeso(consulta.getDouble("peso"));
+        tabla.setGanancia(consulta.getDouble("ganancia"));
+        tabla.setCantalimento(consulta.getDouble("cantalimento"));
+        tabla.setProteina(consulta.getDouble("proteina"));
+        tabla.setNdt(consulta.getDouble("ndt"));
+        tabla.setEm(consulta.getDouble("em"));
+        tabla.setEnmant(consulta.getDouble("enmant"));
+        tabla.setEngan(consulta.getDouble("engan"));
+        tabla.setCalcio(consulta.getDouble("calcio"));
+        tabla.setFosforo(consulta.getDouble("fosforo"));
+        /* específicos de leche */
+        tabla.setEd(consulta.getDouble("ed"));
+        tabla.setEnlact(consulta.getDouble("enlact"));
+        tabla.setVitaminaa(consulta.getDouble("vitaminaa"));
+        tabla.setVitaminad(consulta.getDouble("vitaminad"));
+        tablas.add(tabla);
+        }
+        return tablas;
+     }
+     
+     public TablasNutricionalesLeche buscarRegistroLeche(ResultSet consulta) throws SQLException{
+        TablasNutricionalesLeche tabla = new TablasNutricionalesLeche();
+        if(consulta.next()){
+        tabla.setId(consulta.getInt("id"));
+        tabla.setEtapafisiologica(consulta.getString("etapafisiologica"));
+        tabla.setSexo(consulta.getString("sexo").charAt(0));
+        tabla.setPeso(consulta.getDouble("peso"));
+        tabla.setGanancia(consulta.getDouble("ganancia"));
+        tabla.setCantalimento(consulta.getDouble("cantalimento"));
+        tabla.setProteina(consulta.getDouble("proteina"));
+        tabla.setNdt(consulta.getDouble("ndt"));
+        tabla.setEm(consulta.getDouble("em"));
+        tabla.setEnmant(consulta.getDouble("enmant"));
+        tabla.setEngan(consulta.getDouble("engan"));
+        tabla.setCalcio(consulta.getDouble("calcio"));
+        tabla.setFosforo(consulta.getDouble("fosforo"));
+        /* específicos de leche */
+        tabla.setEd(consulta.getDouble("ed"));
+        tabla.setEnlact(consulta.getDouble("enlact"));
+        tabla.setVitaminaa(consulta.getDouble("vitaminaa"));
+        tabla.setVitaminad(consulta.getDouble("vitaminad"));
+        }
+        return tabla;
+    }
 
 }

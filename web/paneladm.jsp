@@ -101,7 +101,7 @@ function switchSubitem(item){
 				<tr>
 					<td><h1><a href="#">Ganatool </a></h1></td>
 					<td class="mid"><h2>Herramienta para realizar balanceo de dietas de ganado vacuno</h2></td>
-					<td id="conexion"><a href="perfil.jsp"><%=U.getUsuario()%></a></td>
+					<td id="conexion"><a href="#"><%=U.getUsuario()%></a></td>
 				</tr>
 			</table>
 		</div> <!-- end #logo-user -->
@@ -130,8 +130,8 @@ function switchSubitem(item){
   					 <li><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
    				<div id="contenedorsubitem2">
 					<ul>
-   						<li> <a href="#">Tabla nutricional leche</a></li>
-   						<li> <a href="cargarnecesidadescarne.do"></a>Tabla nutricional carne</li>
+   						<li> <a href="cargarnecesidadesleche.do">Tabla nutricional leche</a></li>
+   						<li> <a href="cargarnecesidadescarne.do">Tabla nutricional carne</a></li>
  					</ul>
    				</div>
 					<li><a href="cerrarsesion.do">Salir del sistema</a></li>
@@ -151,8 +151,8 @@ function switchSubitem(item){
 	</div><!-- end #page -->
 	<div id="footer-bgcontent-adm">
 		<div id="footer-adm">
-		<p>Copyright (c) 2010 Grupo 64 bits Dise&ntilde;o por FCT y Kamilo Cervantes
-	<br>Desarrollado por: Jeyra Beltr&aacute;n Sierra | Camilo Cervantes Salazar | Jes&uacute;s Miguel Herazo Hoyos</p>	
+		<p>Desarrollado por: Jeyra Beltr&aacute;n Sierra | Camilo Cervantes Salazar | 
+                Jes&uacute;s Miguel Herazo Hoyos<br/>&copy; 2012 Universidad de C&oacute;rdoba</p>	
 	</div><!-- end #footer -->
 	</div> <!-- end #footer-bgcontent -->	
         <div id="mensajesAyuda">

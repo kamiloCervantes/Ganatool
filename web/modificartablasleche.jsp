@@ -1,4 +1,5 @@
 <%@page import="Objetos.Usuario"%>
+<%@page import="Objetos.TablasNutricionalesLeche"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,9 +18,9 @@
 <script src="js/jquery-1.7.1.min.js" type="text/javascript" language="javascript"></script>
 <script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
 <script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="js/tablasleche.js" type="text/javascript" language="javascript"></script>
 <script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/users.js" type="text/javascript" language="javascript"></script>
 <script type="text/javascript" language="javascript">
 onload=function()
 {
@@ -91,12 +92,17 @@ function switchSubitem(item){
 </script>
  <%
               Usuario U = null;
-              ArrayList<Usuario> users = null;
+              TablasNutricionalesLeche reg = null;
               if (request.getSession().getAttribute("usuario") != null) {
                   U = (Usuario) request.getSession().getAttribute("usuario");
                   if(U.getRol()!= 'a'){
                       response.sendRedirect("panelvet.jsp");
                   }
+                  else{
+                      reg = (TablasNutricionalesLeche) request.getSession().getAttribute("tablas");
+                      if (reg == null) 
+                        response.sendRedirect("paneladm.jsp");
+                    } 
                 }
                   else {
                     response.sendRedirect("index.jsp");
@@ -118,100 +124,92 @@ function switchSubitem(item){
 	<div id="page">
 		<div id="content">
 			<div class="post">
-				<div class="titulo">
-				<h2>Modificar usuario</h2>
-				<hr>
-                                </div>
-			
-			<!-- contenido de la pgina -->
-                            <% 
-                                if (request.getSession().getAttribute("user_mod") != null){
-                                    Usuario mod = (Usuario) request.getSession().getAttribute("user_mod"); %>
-                             
-                                <div id="moduserform" class="formbox">
-                                    <form method="post" id="modificarusuario" name="modificarusuario" action="modificarusuario.do?action=2">
-                                        <input name="usuario" id="usuario" type="hidden" value="<%=mod.getUsuario() %>"/>
-                                        <input name="rol" id="rol" type="hidden" value="<%=mod.getRol() %>"/>
+				<div id="modregform" class="formbox">
+                                    <div class="titulo">
+                                        <h2>Modificar registro nutricional</h2>
+                                        <hr>
+                                    </div>
+                                    <form method="post" id="modregnutricional" action="modificarregistroleche.do?action=2">
+                                        <input type="hidden" name="id" id="id" value="<%=reg.getId()%>"/> 
                                     <p>
-                                        <label for="password">Contrase&ntilde;a</label>
-                                        <input name="password" id="password" value="<%=mod.getPassword()%>" class="validate[required,maxSize[20]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="email">Email</label>
-                                        <input name="email" id="email" value="<%=mod.getEMail()%>" class="validate[required,custom[email],maxSize[50]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="nombre">Nombre</label>
-                                        <input name="nombre" id="nombre" value="<%=mod.getNombre()%>" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
-                                    </p>
-                                     <p>
-                                        <label for="apellidos">Apellidos</label>
-                                        <input name="apellidos" id="apellidos" value="<%=mod.getApellidos()%>" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="tipodoc">Tipo de documento</label>
-                                        <select name="tipodoc" id="tipodoc">
-                                            <option value="<%=mod.getTipoDoc()%>">Seleccione uno...</option>
-                                            <option value="RC">Registro civil</option>
-                                            <option value="TI">Tarjeta de identidad</option>
-                                            <option value="CC">Cedula de ciudadania</option>
-                                            <option value="CE">Cedula de extranjeria</option>
-                                            <option value="OO">Otro...</option>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label for="nrodoc">N&uacute;mero de documento</label>
-                                        <input name="nrodoc" id="nrodoc" value="<%=mod.getNroDoc() %>" class="validate[required,custom[onlyNumberSp]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="pregunta">Pregunta de seguridad</label>
-                                        <input name="pregunta" id="pregunta" value="<%=mod.getPregunta() %>" class="validate[required,maxSize[100]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="respuesta">Respuesta</label>
-                                        <input name="respuesta" id="respuesta" value="<%=mod.getRespuesta()%>" class="validate[required,maxSize[20]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="foto">Imagen de perfil</label>
-                                        <input name="foto" type="file" id="pregunta" value=""/>
-                                    </p>
-                                    <p>
-                                        <label for="direccion">Direcci&oacute;n</label>
-                                        <input name="direccion" id="direccion" value="<%=mod.getDireccion()%>" class="validate[optional,maxSize[50]]"/>
-                                    </p>
-                                    <p>
-                                        <label for="telefono">Tel&eacute;fono</label>
-                                        <input name="telefono" id="telefono" value="<%=mod.getTelefono()%>" class="validate[optional,custom[onlyNumberSp]]"/>
-                                    </p>
-                                     <p>
-                                        <label for="fechanac">Fecha de nacimiento</label>
-                                        <input name="fechanac" id="fechanac" value="<%=mod.getFechaNac()%>" class="validate[optional,custom[date],past[1999-12-31]]"/>
+                                        <label for="etapafisiologica">Etapa fisiol&oacute;gica</label>
+                                        <input name="etapafisiologica" id="usuario" value="<%=reg.getEtapafisiologica() %>" class="validate[required,custom[onlyLetterSp],maxSize[50]]"/>
                                     </p>
                                     <p>
                                         <label for="sexo">Sexo</label>
-                                        <select name="sexo" id="sexo">
-                                            <option value="<%=mod.getSexo()%>">Seleccione uno...</option>
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
-                                        </select>
+                                        <input name="sexo" id="sexo" value="<%=reg.getSexo() %>" class="validate[required,maxSize[1]]"/>
                                     </p>
                                     <p>
-                                        <input type="submit" class="btn" value="Modificar usuario"/>
-                                        <input type="button" class="btn" value="Cancelar" onclick="window.location='listarusuarios.do'"/>
+                                        <label for="peso">Peso</label>
+                                        <input name="peso" id="peso" value="<%=reg.getPeso() %>" class="validate[required,custom[number]"/>
+                                    </p>
+                                    <p>
+                                        <label for="ganancia">Ganancia</label>
+                                        <input name="ganancia" id="ganancia" value="<%=reg.getGanancia() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="cantalimento">Cantidad de alimento</label>
+                                        <input name="cantalimento" id="cantalimento" value="<%=reg.getCantalimento() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="proteina">Prote&iacute;na</label>
+                                        <input name="proteina" id="proteina" value="<%=reg.getProteina() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="ndt">NDT</label>
+                                        <input name="ndt" id="ndt" value="<%=reg.getNdt() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="ed">ED</label><br/>
+                                        <input name="ed" id="ed" value="<%=reg.getEd() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="em">EM</label><br/>
+                                        <input name="em" id="em" value="<%=reg.getEm() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="enmant">Enmant</label>
+                                        <input name="enmant" id="enmant" value="<%=reg.getEnmant() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="engan">Engan</label>
+                                        <input name="engan" id="engan" value="<%=reg.getEngan() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="enlact">Enlact</label>
+                                        <input name="enlact" id="enlact" value="<%=reg.getEngan() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="calcio">Calcio</label>
+                                        <input name="calcio" id="calcio" value="<%=reg.getCalcio() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <label for="fosforo">F&oacute;sforo</label>
+                                        <input name="fosforo" id="fosforo" value="<%=reg.getFosforo() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="vitaminaa">Vitamina A</label>
+                                        <input name="vitaminaa" id="vitaminaa" value="<%=reg.getEngan() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                     <p>
+                                        <label for="vitaminad">Vitamina D</label>
+                                        <input name="vitaminad" id="vitaminad" value="<%=reg.getEngan() %>" class="validate[required,custom[number]]"/>
+                                    </p>
+                                    <p>
+                                        <input type="submit" class="btn" value="Modificar registro"/>
+                                        <input type="button" class="btn" value="Cancelar" onclick="window.location='cargarnecesidadesleche.do'"/>
                                     </p>
                                     </form>
                                 </div>
-                            <%     
-                                    }
-                            %>
+			<!-- contenido de la pgina -->
 		         </div><!-- end #post -->
 		</div> <!-- end #content -->
 		<div id="sidebar">
 			<div class="contenedorlistaadm">
 				<ul>
   					<li><a href="paneladm.jsp">Home</a></li>
-   					<li class="current"> <a href="listarusuarios.do">Usuarios</a></li>
-  					 <li><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
+   					<li> <a href="listarusuarios.do">Usuarios</a></li>
+  					 <li class="current"><a href="javascript:;" onclick="switchSubitem('contenedorsubitem2')">Tablas Nutricionales</a></li>
    				<div id="contenedorsubitem2">
 					<ul>
    						<li> <a href="cargarnecesidadesleche.do">Tabla nutricional leche</a></li>
