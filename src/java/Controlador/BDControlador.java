@@ -14,6 +14,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
+import com.oreilly.servlet.MultipartRequest;
+
 
 /**
  * @author Jesus Herazo
@@ -178,23 +180,25 @@ public class BDControlador {
         return state;
     }
 
-    public int modificarUsuario(HttpServletRequest request, Usuario usuarioActual) throws SQLException {
+    public int modificarUsuario(HttpServletRequest request, MultipartRequest mrequest, Usuario usuarioActual) throws SQLException {
         Usuario U = new Usuario();
         int state = 0;
-        String foto = this.valoresform.get(0);
-        if (!foto.endsWith("s/")) {
-            U.setFoto(foto);
+        //MultipartStream m = new MultipartStream();
+        String foto = mrequest.getParameter("foto");
+        if (foto !=null) {
+            if(!foto.endsWith("s/"))
+                U.setFoto(foto);
         }
-        U.setNombre(this.valoresform.get(1));
-        U.setApellidos(this.valoresform.get(2));
-        U.setDocumento(this.valoresform.get(4), Long.parseLong(this.valoresform.get(3)));
-        U.setSexo(this.valoresform.get(5).charAt(0));
-        U.setFechaNac(Date.valueOf(this.valoresform.get(6)));
-        U.setEMail(this.valoresform.get(7));
-        if (!this.valoresform.get(8).equals("")) {
-            U.setTelefono(Long.parseLong(this.valoresform.get(8)));
+        U.setNombre(mrequest.getParameter("nombre"));
+        U.setApellidos(mrequest.getParameter("apellidos"));
+        U.setDocumento(mrequest.getParameter("tipodoc"), Long.parseLong(mrequest.getParameter("numerodoc")));
+        U.setSexo(mrequest.getParameter("sexo").charAt(0));
+        U.setFechaNac(Date.valueOf(mrequest.getParameter("fechanacimiento")));
+        U.setEMail(mrequest.getParameter("email"));
+        if (!mrequest.getParameter("telefono").equals("")) {
+            U.setTelefono(Long.parseLong(mrequest.getParameter("telefono")));
         }
-        U.setDireccion(this.valoresform.get(9));
+        U.setDireccion(mrequest.getParameter("direccion"));
 
         SQL = "SELECT U.* FROM usuario as U WHERE U.email = ? AND (NOT U.usuario = ?)";
         PS = conexion.prepareStatement(SQL);
@@ -238,7 +242,7 @@ public class BDControlador {
         }
 
         return state;
-    }
+    } 
 
     public String[] buscarPregunta(String tipodoc, long nrodoc)
             throws SQLException {
@@ -586,31 +590,34 @@ public class BDControlador {
             HttpServletRequest request)
             throws SQLException {
         Res R = new Res();
-        R.setCantAlimentoDiario(Float.parseFloat(this.valoresform.get(4)));
-        R.setCodigo(Long.parseLong(this.valoresform.get(1)));
-        R.setEdad(Integer.parseInt(this.valoresform.get(5)));
-        R.setEtapaFisiologica(this.valoresform.get(6));
-        R.setFincaActual(Long.parseLong(this.valoresform.get(9)),
-                this.valoresform.get(9));
-        if (!this.valoresform.get(10).equals("")
-                && !this.valoresform.get(11).equals("")) {
-            R.setLeche(Float.parseFloat(this.valoresform.get(10)),
-                    Float.parseFloat(this.valoresform.get(11)));
+        R.setProposito(request.getParameter("proposito").charAt(0));
+        R.setCodigo(Long.parseLong(request.getParameter("codigo")));
+        R.setSexo(request.getParameter("sexo").charAt(0));
+        R.setPeso(Float.parseFloat(request.getParameter("peso")));
+        R.setCantAlimentoDiario(Float.parseFloat(request.getParameter("cantalimento")));
+        
+        R.setEdad(Integer.parseInt(request.getParameter("edad")));
+        R.setEtapaFisiologica(request.getParameter("etapa"));
+        R.setRaza(request.getParameter("raza"));
+        R.setPropietario(request.getParameter("propietario"));
+        R.setFincaActual(Long.parseLong(request.getParameter("nitfinca")),
+                this.buscarFinca(Long.parseLong(request.getParameter("nitfinca"))).getNombre());
+        if (!request.getParameter("cantleche3").equals("")
+                && !request.getParameter("cantleche").equals("")) {
+            R.setLeche(Float.parseFloat(request.getParameter("cantleche3")),
+                    Float.parseFloat(request.getParameter("cantleche")));
         }
-        R.setPeso(Float.parseFloat(this.valoresform.get(3)));
-        R.setPropietario(this.valoresform.get(8));
-        R.setProposito(this.valoresform.get(0).charAt(0));
-        R.setRaza(this.valoresform.get(7));
-        R.setSexo(this.valoresform.get(2).charAt(0));
-        if (!this.valoresform.get(12).equals("")) {
-            R.setUltimoParto(Date.valueOf(this.valoresform.get(12)));
+        
+        if (!request.getParameter("cantleche2").equals("")) {
+            R.setUltimoParto(Date.valueOf(request.getParameter("cantleche2")));
         }
         request.getSession().setAttribute("datosRes", R);
-        String viejocodigo = request.getSession().getAttribute("viejocodigo").toString();
-        String viejonit = request.getSession().getAttribute("viejonit").toString();
+
+        /*String viejocodigo = request.getSession().getAttribute("viejocodigo").toString();
+        ;*/
 
         int state = 0;
-        SQL = "SELECT G.* FROM Res as G WHERE G.codigo = ? AND G.nitfinca = ?"
+       /* SQL = "SELECT G.* FROM Res as G WHERE G.codigo = ? AND G.nitfinca = ?"
                 + "AND NOT (G.codigo = ? AND G.nitfinca = ?)";
         PS = conexion.prepareStatement(SQL);
         PS.setLong(1, R.getCodigo());
@@ -620,29 +627,27 @@ public class BDControlador {
 
         if (AG.existeRes(PS.executeQuery())) {
             state = 1;
-        }
+        }*/
 
         if (state == 0) {
-            SQL = "UPDATE Res SET codigo = ?, proposito = ?, sexo = ?, peso = ?,"
+            SQL = "UPDATE Res SET sexo = ?, peso = ?,"
                     + " edad = ?, etapafisiologica = ?, cantleche = ?, porcgrasaleche = ?,"
                     + " raza = ?, propietario = ?, ultimoparto = ?, cantalimento = ?,"
                     + " nitfinca = ? WHERE codigo = ? AND nitfinca = ?";
             PS = conexion.prepareStatement(SQL);
-            PS.setLong(1, R.getCodigo());
-            PS.setString(2, R.getProposito() + "");
-            PS.setString(3, R.getSexo() + "");
-            PS.setFloat(4, R.getPeso());
-            PS.setInt(5, R.getEdad());
-            PS.setString(6, R.getEtapaFisiologica());
-            PS.setFloat(7, R.getCantLecheDiaria());
-            PS.setFloat(8, R.getPorcGrasaLeche());
-            PS.setString(9, R.getRaza());
-            PS.setString(10, R.getPropietario());
-            PS.setDate(11, R.getUltimoParto());
-            PS.setFloat(12, R.getCantAlimentoDiario());
+            PS.setString(1, R.getSexo() + "");
+            PS.setFloat(2, R.getPeso());
+            PS.setInt(3, R.getEdad());
+            PS.setString(4, R.getEtapaFisiologica());
+            PS.setFloat(5, R.getCantLecheDiaria());
+            PS.setFloat(6, R.getPorcGrasaLeche());
+            PS.setString(7, R.getRaza());
+            PS.setString(8, R.getPropietario());
+            PS.setDate(9, R.getUltimoParto());
+            PS.setFloat(10, R.getCantAlimentoDiario());
+            PS.setLong(11, R.getNitFincaActual());
+            PS.setLong(12, R.getCodigo());
             PS.setLong(13, R.getNitFincaActual());
-            PS.setLong(14, Long.parseLong(viejocodigo));
-            PS.setLong(15, Long.parseLong(viejonit));
 
             PS.executeUpdate();
 

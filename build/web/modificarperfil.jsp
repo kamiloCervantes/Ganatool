@@ -71,7 +71,7 @@
        </tr>
       </table>
      </div>
-     <form action="modificarperfil.do" method="post"  enctype="multipart/form-data">
+     <form action="modificarperfil.do" method="post" id="modificarperfil" enctype="multipart/form-data">
       <%
                   String foto = U.getFoto();
                   if (foto == null || foto == "") {
@@ -223,8 +223,8 @@
   </div><!-- end #page -->
   <div id="footer-bgcontent">
    <div id="footer">
-    <p>Copyright (c) 2010 Grupo 64 bits Dise&ntilde;o por FCT y Kamilo Cervantes
-     <br />Desarrollado por: Jeyra Beltr&aacute;n Sierra | Kamilo Cervantes Salazar | Jes&uacute;s Miguel Herazo Hoyos</p>
+    <p>Desarrollado por: Jeyra Beltr&aacute;n Sierra | Camilo Cervantes Salazar | 
+                Jes&uacute;s Miguel Herazo Hoyos<br/>&copy; 2012 Universidad de C&oacute;rdoba</p>
    </div><!-- end #footer -->
   </div> <!-- end #footer-bgcontent -->
   <div id="mensajesAyuda">

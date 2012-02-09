@@ -116,45 +116,16 @@
       <p class="msgerror">No tiene fincas registradas por lo cual no puede agregar nuevas reses.</p>
       <%                        } else {
       %>
-      <form name="form1" id="form1" action="modificarres.do" method="post" enctype="multipart/form-data">
+      <form name="form1" id="form1" action="modificarres.do" method="post">
+          <input type="hidden" name="proposito" value="<%=R.getProposito()%>"/>
+          <input type="hidden" name="codigo" value="<%=R.getCodigo()%>"/>
+          <input type="hidden" name="nitfinca" value="<%=R.getNitFincaActual() %>"/>
        <table width="600" cellspacing="0" class="estilo1_table">
         <tr>
          <td colspan="3"><div align="left"><em>(<span class="Estilo1">*</span>) Campo obligatorio.</em></div></td>
         </tr>
         <tr>
          <td colspan="3" bgcolor="#2F33CC"><div align="center"></div></td>
-        </tr>
-        <tr>
-         <td class="Estilo1">
-          <div align="center" class="Estilo1">*</div></td>
-         <td>Tipo de producci&oacute;n:</td>
-         <td width="300">
-          <div align="left">
-           <span id="spryselect1">
-            <select name="produccion" if="produccion" style="width:325px" onchange="etapas()">
-             <option>Seleccione uno... </option>
-             <option <%=(R.getProposito() == 'L' ? "selected='selected'" : "")%> value="L">Lechero</option>
-             <option <%=(R.getProposito() == 'C' ? "selected='selected'" : "")%> value="C">C&aacute;rnico</option>
-            </select>
-            <span class="selectRequiredMsg">Seleccione un elemento.</span>
-           </span>
-          </div>
-         </td>
-        </tr>
-        <tr>
-         <td class="Estilo1">
-          <div align="center" class="Estilo1">*</div>
-         </td>
-         <td>C&oacute;digo:</td>
-         <td width="300">
-          <div align="left">
-           <span id="sprytextfield1">
-            <input name="codigo" id="codigo" size="50" type="text" <%=(R.getCodigo() != 0 ? "value='" + R.getCodigo() + "'" : "")%>/>
-            <span class="textfieldRequiredMsg">Se necesita un valor.</span>
-            <span class="textfieldInvalidFormatMsg">Formato no válido.</span>
-           </span>
-          </div>
-         </td>
         </tr>
         <tr>
          <td class="Estilo1">
@@ -269,28 +240,11 @@
           </div>
          </td>
         </tr>
+      
         <tr>
-         <td class="Estilo1">
-          <div align="center" class="Estilo2">*</div>
-         </td>
-         <td>Finca:</td>
-         <td width="300">
-          <div align="left"><span id="spryselect3">
-            <select name="nitfinca" id="nitfinca" style="width:325px">
-             <option>Seleccione una...</option>
-             <%
-                                   for (int i = 0; i < fincas.size(); i++) {
-                                       Finca F = fincas.get(i);
-             %>
-             <option <%=(R.getNitFincaActual() == F.getNit() ? "selected='selected'" : "")%> value="<%=F.getNit()%>"><%=F.getNombre()%></option>
-             <%
-                                   }
-             %>
-            </select>
-            <span class="selectRequiredMsg">Seleccione un elemento.</span></span></div>
-         </td>
-        </tr>
-        <tr>
+         <% 
+            if(R.getProposito()=='L'){
+           %>   
          <td colspan="3" bgcolor="#2F33CC">
           <div align="center"></div>
          </td>
@@ -323,6 +277,7 @@
             <span class="textfieldInvalidFormatMsg">Formato no válido.</span></span></div>
          </td>
         </tr>
+            <% } %>
        </table>
        <table width="600" cellpadding="2" cellspacing="2" class="estilo1_table">
         <tr>

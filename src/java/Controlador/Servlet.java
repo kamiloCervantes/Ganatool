@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.oreilly.servlet.MultipartRequest;
 
 /**
  *
@@ -339,14 +340,16 @@ public class Servlet extends HttpServlet {
             HttpServletResponse response)
             throws SQLException, IOException {
         usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
- //       DriverBD.subirImagen(request);
-        int state = DriverBD.modificarUsuario(request, usuarioActual);
+        MultipartRequest mrequest = new MultipartRequest(request, DriverBD.RUTA); 
+        DriverBD.subirImagen(request);
+        int state = DriverBD.modificarUsuario(request, mrequest, usuarioActual);
         if (state == 0) {
             response.sendRedirect("perfil.jsp");
         } else {
             response.sendRedirect("modificarperfil.jsp?aviso=1");
         }
     }
+    
 
     private void cambiarCuenta(HttpServletRequest request,
             HttpServletResponse response)
@@ -513,7 +516,6 @@ public class Servlet extends HttpServlet {
             HttpServletResponse response)
             throws SQLException, IOException {
         usuarioActual = (Usuario) request.getSession().getAttribute("usuario");
-        DriverBD.subirImagen(request);
         int aviso = DriverBD.modificarRes(usuarioActual, request);
         if (aviso == 0) {
             listarReses(request, response);
